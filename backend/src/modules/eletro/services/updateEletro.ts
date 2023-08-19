@@ -2,10 +2,7 @@ import { AppError } from "../../../error/AppError";
 import { prisma } from "../../../prisma/client";
 import { EletroType } from "../dtos/CreateEletroDTO";
 
-export const UpdateEletro = async (
-  id: number,
-  data: EletroType
-): Promise<EletroType> => {
+export async function UpdateEletro(id: number, data: EletroType) {
   const response = await prisma.eletro.update({
     where: {
       id,
@@ -16,4 +13,4 @@ export const UpdateEletro = async (
     throw new AppError("Esse Eletro nao existe");
   }
   return response;
-};
+}
