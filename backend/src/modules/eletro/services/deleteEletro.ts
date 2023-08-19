@@ -8,7 +8,7 @@ export const DeleteEletroById = async (id: number): Promise<void> => {
     },
   });
   if (response == null) {
-    throw new AppError("Eletro ja existe");
+    throw new AppError("Esse Eletro nao existe");
   }
   return;
 };

@@ -1,4 +1,4 @@
-export interface CreateEletroDTO {
+export interface EletroDTO {
   nome: string;
   kwh: number;
 }
