@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { deleteStyle } from './Style';
 
@@ -9,8 +9,8 @@ interface ButtonInterface {
 
 export const DeleteButton = () => {
   return (
-    <View style={deleteStyle.container}>
+    <TouchableOpacity style={deleteStyle.container}>
       <Text style={deleteStyle.text}>Deletar</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
