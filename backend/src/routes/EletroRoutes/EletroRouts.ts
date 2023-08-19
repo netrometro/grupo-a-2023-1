@@ -3,6 +3,7 @@ import {
   createEletroController,
   getEletroByIdController,
   getEletroController,
+  putEletroController,
 } from "../../modules/eletro/controller/EletroController";
 
 async function eletroRoutes(server: FastifyInstance) {
@@ -11,6 +12,8 @@ async function eletroRoutes(server: FastifyInstance) {
   server.get("/", getEletroController);
 
   server.get("/:id", getEletroByIdController);
+
+  server.put("/:id", putEletroController);
 }
 
 export default eletroRoutes;
