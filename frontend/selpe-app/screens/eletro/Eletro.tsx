@@ -10,10 +10,10 @@ export function Eletro() {
     <SafeAreaView>
       <StatusBar barStyle="dark-content" />
       <View style={eletroStyle.container}>
-        <View>
-          <Text>Eletrodomesticos</Text>
+        <View style={eletroStyle.titleDiv}>
+          <Text style={eletroStyle.principalTitle}>Eletrodomesticos</Text>
         </View>
-        <View>
+        <View style={eletroStyle.buttons}>
           <AddButton />
           <DeleteButton />
         </View>
