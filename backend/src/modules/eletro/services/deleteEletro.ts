@@ -11,3 +11,7 @@ export const DeleteEletroById = async (id: number): Promise<void> => {
     throw new AppError("Eletro ja existe");
   }
 };
+
+export const DeleteAllEletro = async (): Promise<void> => {
+  const response = await prisma.eletro.deleteMany({});
+};
