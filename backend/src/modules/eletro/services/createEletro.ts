@@ -1,27 +1,12 @@
 import { Eletro } from "@prisma/client";
-import { EletroDTO } from "../dtos/CreateEletroDTO";
+
 import { prisma } from "../../../prisma/client";
 import { AppError } from "../../../error/AppError";
+import { EletroType } from "../dtos/CreateEletroDTO";
 
-export const CreateEletro = async ({
-  nome,
-  kwh,
-}: EletroDTO): Promise<Eletro> => {
-  const eletroAlreadyExist = await prisma.eletro.findUnique({
-    where: {
-      nome,
-    },
-  });
-
-  if (eletroAlreadyExist) {
-    throw new AppError("Eletro ja existe");
-  }
-
+export async function CreateEletro(body: EletroType) {
   const eletro = await prisma.eletro.create({
-    data: {
-      nome,
-      kwh,
-    },
+    data: body,
   });
   return eletro;
-};
+}

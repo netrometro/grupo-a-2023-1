@@ -1,12 +1,23 @@
-import fastify from "fastify";
+import Fastify from "fastify";
+import eletroRoutes from "./routes/EletroRoutes/EletroRouts";
 
-const app = fastify();
+const server = Fastify();
 
-app
-  .listen({
-    host: "0.0.0.0",
-    port: 3000,
-  })
-  .then(() => {
-    console.log("Servidor rodando!");
-  });
+// just to check if its running
+server.get("/healthcheck", async function () {
+  return { status: "ok" };
+});
+
+async function main() {
+  server.register(eletroRoutes, { prefix: "api/eletro" });
+
+  try {
+    await server.listen(3000);
+    console.log("Server ready at port 3000");
+  } catch (e) {
+    console.log(e);
+    process.exit(1);
+  }
+}
+
+main();

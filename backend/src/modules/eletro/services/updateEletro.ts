@@ -1,11 +1,11 @@
 import { AppError } from "../../../error/AppError";
 import { prisma } from "../../../prisma/client";
-import { EletroDTO } from "../dtos/CreateEletroDTO";
+import { EletroType } from "../dtos/CreateEletroDTO";
 
 export const UpdateEletro = async (
   id: number,
-  data: EletroDTO
-): Promise<EletroDTO> => {
+  data: EletroType
+): Promise<EletroType> => {
   const response = await prisma.eletro.update({
     where: {
       id,
