@@ -3,7 +3,7 @@ import { prisma } from "../../../prisma/client";
 import { CreateEletroDTO } from "../dtos/CreateEletroDTO";
 import { AppError } from "../../../error/AppError";
 
-export const GetEletro = async (): Promise<Eletro[]> => {
+export const GetAllEletro = async (): Promise<Eletro[]> => {
   const response = await prisma.eletro.findMany();
   return response;
 };
