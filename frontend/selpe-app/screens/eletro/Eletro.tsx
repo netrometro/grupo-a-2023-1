@@ -1,10 +1,13 @@
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView, StatusBar } from 'react-native';
 import React from 'react';
 
 export const Eletro = () => {
   return (
-    <View>
-      <Text>Eletro</Text>
-    </View>
+    <SafeAreaView>
+      <StatusBar barStyle="dark-content" />
+      <View>
+        <Text>Eletro</Text>
+      </View>
+    </SafeAreaView>
   );
 };
