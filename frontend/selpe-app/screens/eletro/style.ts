@@ -1,3 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-const EletroStyle = StyleSheet.create({});
+export const eletroStyle = StyleSheet.create({
+  container: {
+    backgroundColor: '#2980B9',
+    height: '100%',
+    flexDirection: 'column',
+    alignItems: 'center'
+  }
+});

@@ -1,11 +1,13 @@
 import { View, Text, SafeAreaView, StatusBar } from 'react-native';
 import React from 'react';
+import { eletroStyle } from './style';
+import { EletroList } from '../../components/eletrolist/EletroList';
 
-export const Eletro = () => {
+export function Eletro() {
   return (
     <SafeAreaView>
       <StatusBar barStyle="dark-content" />
-      <View>
+      <View style={eletroStyle.container}>
         <View>
           <Text>Eletrodomesticos</Text>
         </View>
@@ -14,9 +16,9 @@ export const Eletro = () => {
           <Text>Deletar tudo</Text>
         </View>
         <View>
-          <Text>listar</Text>
+          <EletroList />
         </View>
       </View>
     </SafeAreaView>
   );
-};
+}
