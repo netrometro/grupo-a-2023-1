@@ -17,7 +17,7 @@ export const GetEletroById = async (
     },
   });
   if (response == null) {
-    throw new AppError("Eletro ja existe");
+    throw new AppError("Esse Eletro nao existe");
   }
   return response;
 };
