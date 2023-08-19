@@ -6,6 +6,7 @@ import {
   getEletroController,
   putEletroController,
 } from "../../modules/eletro/controller/EletroController";
+import { DeleteAllEletro } from "../../modules/eletro/services/deleteEletro";
 
 async function eletroRoutes(server: FastifyInstance) {
   server.post("/", createEletroController);
@@ -17,6 +18,8 @@ async function eletroRoutes(server: FastifyInstance) {
   server.put("/:id", putEletroController);
 
   server.delete("/:id", deleteEletroById);
+
+  server.delete("/", DeleteAllEletro);
 }
 
 export default eletroRoutes;
