@@ -9,12 +9,6 @@ export const Home = () => {
   return (
     <View>
       <Text>Home</Text>
-      <Button
-        title="outra tela"
-        onPress={() => {
-          navigation.navigate('Eletro');
-        }}
-      />
     </View>
   );
 };
