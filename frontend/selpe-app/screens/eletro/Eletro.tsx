@@ -6,7 +6,16 @@ export const Eletro = () => {
     <SafeAreaView>
       <StatusBar barStyle="dark-content" />
       <View>
-        <Text>Eletro</Text>
+        <View>
+          <Text>Eletrodomesticos</Text>
+        </View>
+        <View>
+          <Text>Adicionar</Text>
+          <Text>Deletar tudo</Text>
+        </View>
+        <View>
+          <Text>listar</Text>
+        </View>
       </View>
     </SafeAreaView>
   );
