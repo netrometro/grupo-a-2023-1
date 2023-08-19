@@ -6,5 +6,8 @@ export const eletroStyle = StyleSheet.create({
     height: '100%',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  list: {
+    width: '90%'
   }
 });

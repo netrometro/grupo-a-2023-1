@@ -15,7 +15,7 @@ export function Eletro() {
           <Text>Adicionar</Text>
           <Text>Deletar tudo</Text>
         </View>
-        <View>
+        <View style={eletroStyle.list}>
           <EletroList />
         </View>
       </View>
