@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, StatusBar } from 'react-native';
 import React from 'react';
 import { eletroStyle } from './style';
 import { EletroList } from '../../components/eletrolist/EletroList';
+import { DeleteButton } from '../../components/deleteButton/DeleteButton';
 
 export function Eletro() {
   return (
@@ -13,7 +14,7 @@ export function Eletro() {
         </View>
         <View>
           <Text>Adicionar</Text>
-          <Text>Deletar tudo</Text>
+          <DeleteButton />
         </View>
         <View style={eletroStyle.list}>
           <EletroList />

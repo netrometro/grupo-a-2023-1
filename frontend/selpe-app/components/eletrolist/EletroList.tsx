@@ -4,6 +4,13 @@ import { listStyle } from './Style';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
+interface EletroListInterface {
+  name: string;
+  kwh: number;
+  editFunc(): void;
+  deleteFunc(): void;
+}
+
 export const EletroList = () => {
   return (
     <View style={listStyle.container}>
