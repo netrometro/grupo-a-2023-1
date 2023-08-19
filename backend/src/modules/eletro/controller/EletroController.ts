@@ -3,6 +3,7 @@ import { CreateEletro } from "../services/createEletro";
 import { EletroType } from "../dtos/CreateEletroDTO";
 import { GetAllEletro, GetEletroById } from "../services/getEletro";
 import { UpdateEletro } from "../services/updateEletro";
+import { DeleteEletroById } from "../services/deleteEletro";
 
 export async function createEletroController(
   req: FastifyRequest<{ Body: EletroType }>,
@@ -55,6 +56,17 @@ export async function putEletroController(
   const id = Object(req.params);
   try {
     const eletro = await UpdateEletro(parseInt(id.id), body);
+    return res.code(201).send(eletro);
+  } catch (e) {
+    console.log(e);
+    return res.code(500).send(e);
+  }
+}
+
+export async function deleteEletroById(req: FastifyRequest, res: FastifyReply) {
+  const id = Object(req.params);
+  try {
+    const eletro = await DeleteEletroById(parseInt(id.id));
     return res.code(201).send(eletro);
   } catch (e) {
     console.log(e);

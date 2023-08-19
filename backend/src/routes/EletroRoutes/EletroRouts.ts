@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
 import {
   createEletroController,
+  deleteEletroById,
   getEletroByIdController,
   getEletroController,
   putEletroController,
@@ -14,6 +15,8 @@ async function eletroRoutes(server: FastifyInstance) {
   server.get("/:id", getEletroByIdController);
 
   server.put("/:id", putEletroController);
+
+  server.delete("/:id", deleteEletroById);
 }
 
 export default eletroRoutes;
