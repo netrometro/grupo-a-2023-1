@@ -9,3 +9,44 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int       @id @default(autoincrement())
+  name     String
+  email    String    @unique
+  endereco String?
+  Consumo  Consumo[]
+}
+
+model Eletro {
+  id       Int             @id @default(autoincrement())
+  nome     String          @unique
+  kwh      Int
+  consumos ConsumoEletro[]
+}
+
+model Consumo {
+  id       Int             @id @default(autoincrement())
+  userId   Int
+  date     DateTime        @default(now())
+  dinheiro Int
+  kwh      Int
+  consumos ConsumoEletro[]
+  user     User            @relation(fields: [userId], references: [id])
+}
+
+model ConsumoEletro {
+  id         Int      @id @default(autoincrement())
+  consumoId  Int
+  eletroId   Int
+  dinheiro   Int
+  kwh        Int
+  Consumo    Consumo @relation(fields: [consumoId], references: [id])
+  Eletro     Eletro  @relation(fields: [eletroId], references: [id])
+}
+
+model Dicas {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+}
