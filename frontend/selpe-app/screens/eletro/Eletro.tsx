@@ -3,6 +3,7 @@ import React from 'react';
 import { eletroStyle } from './style';
 import { EletroList } from '../../components/eletrolist/EletroList';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
+import { AddButton } from '../../components/addButton/AddButton';
 
 export function Eletro() {
   return (
@@ -13,7 +14,7 @@ export function Eletro() {
           <Text>Eletrodomesticos</Text>
         </View>
         <View>
-          <Text>Adicionar</Text>
+          <AddButton />
           <DeleteButton />
         </View>
         <View style={eletroStyle.list}>
