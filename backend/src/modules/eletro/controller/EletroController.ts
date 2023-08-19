@@ -32,10 +32,11 @@ export async function getEletroController(
 }
 
 export async function getEletroByIdController(
-  req: FastifyRequest<{ id: number }>,
+  req: FastifyRequest,
   res: FastifyReply
 ) {
-  const id: number = req.query;
+  const id: number = Number(req.query);
+
   try {
     const eletro = await GetEletroById(id);
     return res.code(201).send(eletro);
@@ -43,4 +44,11 @@ export async function getEletroByIdController(
     console.log(e);
     return res.code(500).send(e);
   }
+}
+
+export async function putEletroController(
+  req: FastifyRequest<{ Body: EletroType }>,
+  res: FastifyReply
+) {
+  const body = req.body;
 }

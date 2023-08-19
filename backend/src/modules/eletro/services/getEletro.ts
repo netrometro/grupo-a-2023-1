@@ -9,7 +9,7 @@ export async function GetAllEletro() {
   return response;
 }
 
-export async function GetEletroByID(id: number) {
+export async function GetEletroById(id: number) {
   const response = await prisma.eletro.findUnique({
     where: {
       id,
