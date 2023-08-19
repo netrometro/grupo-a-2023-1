@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { CreateEletro } from "../services/createEletro";
 import { EletroType } from "../dtos/CreateEletroDTO";
 import { GetAllEletro, GetEletroById } from "../services/getEletro";
+import { UpdateEletro } from "../services/updateEletro";
 
 export async function createEletroController(
   req: FastifyRequest<{ Body: EletroType }>,
@@ -35,10 +36,10 @@ export async function getEletroByIdController(
   req: FastifyRequest,
   res: FastifyReply
 ) {
-  const id: number = Number(req.query);
+  const id = Object(req.params);
 
   try {
-    const eletro = await GetEletroById(id);
+    const eletro = await GetEletroById(parseInt(id.id));
     return res.code(201).send(eletro);
   } catch (e) {
     console.log(e);
@@ -51,4 +52,12 @@ export async function putEletroController(
   res: FastifyReply
 ) {
   const body = req.body;
+  const id = Object(req.params);
+  try {
+    const eletro = await UpdateEletro(parseInt(id.id), body);
+    return res.code(201).send(eletro);
+  } catch (e) {
+    console.log(e);
+    return res.code(500).send(e);
+  }
 }
