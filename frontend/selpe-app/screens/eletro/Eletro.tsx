@@ -19,10 +19,23 @@ import axios from 'axios';
 export function Eletro() {
   const [eletroList, setEletroList] = useState<Array<EletroListInterface>>([]);
   const [registerOpen, setRegisterOpen] = useState<boolean>(false);
+  const [eletroName, setEletroName] = useState<string>('');
+  const [eletroKwh, setEletroKwh] = useState<number>(0);
 
   useEffect(() => {
     eletroListRequest();
   }, []);
+
+  const handleChangeName = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setEletroName(value);
+    console.log(value);
+  };
+
+  const handleChangeKwh = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setEletroKwh(value);
+  };
 
   const eletroListRequest = async () => {
     await api
@@ -30,6 +43,25 @@ export function Eletro() {
       .then((res) => {
         console.log(res);
         console.log(res.data);
+        setEletroList(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const data: EletroListInterface = {
+    nome: eletroName,
+    kwh: eletroKwh
+  };
+
+  const eletroListCreate = async () => {
+    await api
+      .post('api/eletro', data)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        console.log('cadastrou');
       })
       .catch((error) => {
         console.error(error);
@@ -56,20 +88,40 @@ export function Eletro() {
           <AddButton name={''} createFunc={openRegister} />
           <DeleteButton />
         </View>
-        {!registerOpen && (
+        {registerOpen && (
           <TouchableWithoutFeedback onPress={closeKeyboard}>
             <View style={eletroStyle.registerScreen}>
               <Text style={eletroStyle.registerTitle}>Cadastro</Text>
-              <TextInput style={eletroStyle.registerInput} placeholder="Eletrodomestico" />
-              <TextInput style={eletroStyle.registerInput} placeholder="Kwh" />
-              <TouchableOpacity style={eletroStyle.registerButton}>
+              <TextInput
+                style={eletroStyle.registerInput}
+                placeholder="Eletrodomestico"
+                onChange={() => handleChangeName}
+              />
+              <TextInput
+                style={eletroStyle.registerInput}
+                placeholder="Kwh"
+                onChange={() => handleChangeKwh}
+              />
+              <TouchableOpacity style={eletroStyle.registerButton} onPress={eletroListCreate}>
                 <Text style={eletroStyle.registerButtonText}>Cadastrar</Text>
               </TouchableOpacity>
             </View>
           </TouchableWithoutFeedback>
         )}
         <View style={eletroStyle.list}>
-          <EletroList />
+          {eletroList &&
+            eletroList.map((item) => (
+              <EletroList
+                name={item.nome}
+                kwh={item.kwh}
+                editFunc={function (): void {
+                  throw new Error('Function not implemented.');
+                }}
+                deleteFunc={function (): void {
+                  throw new Error('Function not implemented.');
+                }}
+              />
+            ))}
         </View>
       </View>
     </SafeAreaView>
