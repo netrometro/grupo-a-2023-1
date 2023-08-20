@@ -1,15 +1,17 @@
 import Fastify from "fastify";
-import eletroRoutes from "./routes/EletroRoutes/EletroRouts";
+import userRoutes from "./routes/userRoutes";
+import cors from "@fastify/cors";
 
 const server = Fastify();
 
-// just to check if its running
 server.get("/healthcheck", async function () {
   return { status: "ok" };
 });
 
+server.register(cors, { origin: true });
+
 async function main() {
-  server.register(eletroRoutes, { prefix: "api/eletro" });
+  server.register(userRoutes, { prefix: "api/user" });
 
   try {
     await server.listen(3000);
