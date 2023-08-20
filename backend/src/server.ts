@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import eletroRoutes from "./routes/EletroRoutes/EletroRouts";
+import cors from "@fastify/cors";
 
 const server = Fastify();
 
@@ -9,6 +10,7 @@ server.get("/healthcheck", async function () {
 });
 
 async function main() {
+  server.register(cors, { origin: true });
   server.register(eletroRoutes, { prefix: "api/eletro" });
 
   try {
