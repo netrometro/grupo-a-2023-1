@@ -3,7 +3,7 @@ import React from 'react';
 import { deleteStyle } from './Style';
 
 interface ButtonInterface {
-  name: string;
+  name: React.ReactNode;
   deleteFunc(): void;
 }
 

@@ -3,23 +3,32 @@ import { StyleSheet } from 'react-native';
 export const eletroStyle = StyleSheet.create({
   container: {
     backgroundColor: '#2980B9',
-    height: '100%',
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     gap: 10
   },
-  titleDiv: {},
+  titleDiv: {
+    flex: 1,
+    alignContent: 'center',
+    marginTop: 80
+  },
   principalTitle: {
     color: '#fff',
-    fontSize: 30
+    fontSize: 30,
+    fontWeight: 'bold'
   },
   list: {
+    flex: 5,
     width: '90%'
   },
+
   buttons: {
+    flex: 1,
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    alignItems: 'flex-end',
     gap: 10
   },
   registerScreen: {
@@ -33,7 +42,8 @@ export const eletroStyle = StyleSheet.create({
   registerTitle: {
     color: '#2980B9',
     fontSize: 30,
-    marginTop: 20
+    marginTop: 20,
+    fontWeight: 'bold'
   },
   registerButton: {
     backgroundColor: '#2980B9',
@@ -49,7 +59,7 @@ export const eletroStyle = StyleSheet.create({
     width: '90%',
     padding: 20,
     margin: 20,
-    color: '#E8E8E8',
+    color: '#000',
     borderRadius: 20
   }
 });

@@ -8,7 +8,8 @@ export const listStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 12,
-    borderRadius: 12
+    borderRadius: 12,
+    marginTop: 14
   },
   iconsView: {
     flexDirection: 'row',
