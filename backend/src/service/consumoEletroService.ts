@@ -31,7 +31,7 @@ export async function deleteConsumoEletro(input: Number) {
   });
 
   if (!consumoEletro) {
-    throw new Error("user not found");
+    throw new Error("consumoEletro not found");
   }
 
   const deleteConsumoEletro = await prisma.consumoEletro.delete({
