@@ -15,7 +15,7 @@ server.register(cors, { origin: true });
 async function main() {
   server.register(userRoutes, { prefix: "api/user" });
   server.register(consumoEletroRoutes, { prefix: "api/consumosEletro" });
-  server.register(consumoRoutes, { prefix: "api/consumo/" });
+  server.register(consumoRoutes, { prefix: "api/consumo"})
 
   try {
     await server.listen(3000);
