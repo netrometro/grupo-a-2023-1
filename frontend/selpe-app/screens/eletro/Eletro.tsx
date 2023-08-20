@@ -26,15 +26,12 @@ export function Eletro() {
     eletroListRequest();
   }, []);
 
-  const handleChangeName = (e: { target: { value: string } }) => {
-    const { value } = e.target;
+  const handleChangeName = (value: string) => {
     setEletroName(value);
-    console.log(value);
   };
 
-  const handleChangeKwh = (e: { target: { value: number } }) => {
-    const { value } = e.target;
-    setEletroKwh(value);
+  const handleChangeKwh = (value: string) => {
+    setEletroKwh(parseInt(value));
   };
 
   const eletroListRequest = async () => {
@@ -68,6 +65,32 @@ export function Eletro() {
       });
   };
 
+  const eletroListDelete = async () => {
+    await api
+      .delete('api/eletro')
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        console.log('deletou');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const eletroListPut = async (id: number) => {
+    await api
+      .post(`api/eletro/${id}`, data)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        console.log('cadastrou');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   function closeKeyboard() {
     Keyboard.dismiss();
   }
@@ -86,21 +109,21 @@ export function Eletro() {
 
         <View style={eletroStyle.buttons}>
           <AddButton name={''} createFunc={openRegister} />
-          <DeleteButton />
+          <DeleteButton name="Deletar" deleteFunc={eletroListDelete} />
         </View>
         {registerOpen && (
-          <TouchableWithoutFeedback onPress={closeKeyboard}>
+          <TouchableWithoutFeedback>
             <View style={eletroStyle.registerScreen}>
               <Text style={eletroStyle.registerTitle}>Cadastro</Text>
               <TextInput
                 style={eletroStyle.registerInput}
                 placeholder="Eletrodomestico"
-                onChange={() => handleChangeName}
+                onChangeText={(e) => handleChangeName(e)}
               />
               <TextInput
                 style={eletroStyle.registerInput}
                 placeholder="Kwh"
-                onChange={() => handleChangeKwh}
+                onChangeText={(e) => handleChangeKwh(e)}
               />
               <TouchableOpacity style={eletroStyle.registerButton} onPress={eletroListCreate}>
                 <Text style={eletroStyle.registerButtonText}>Cadastrar</Text>

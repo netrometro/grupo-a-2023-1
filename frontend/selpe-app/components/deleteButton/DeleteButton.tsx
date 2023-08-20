@@ -7,10 +7,10 @@ interface ButtonInterface {
   deleteFunc(): void;
 }
 
-export const DeleteButton = () => {
+export function DeleteButton({ name, deleteFunc }: ButtonInterface) {
   return (
-    <TouchableOpacity style={deleteStyle.container}>
-      <Text style={deleteStyle.text}>Deletar</Text>
+    <TouchableOpacity style={deleteStyle.container} onPress={deleteFunc}>
+      <Text style={deleteStyle.text}>{name}</Text>
     </TouchableOpacity>
   );
-};
+}
