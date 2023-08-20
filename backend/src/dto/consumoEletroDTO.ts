@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const consumoEletroDTO = z.object({
+export const consumoEletroDTO = z.object({
   eletroId: z.number({
     required_error: "eletroId is required",
     invalid_type_error: "eletroId must be a number",
