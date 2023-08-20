@@ -18,6 +18,7 @@ import { api } from '../../services/Api';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import axios from 'axios';
 import { InfoListCard } from '../../components/infoListCard/InfoListCard';
 
@@ -185,10 +186,16 @@ export function Eletro() {
 
       <View style={eletroStyle.buttons}>
         {!registerOpen && (
-          <AddButton
-            name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
-            createFunc={openRegister}
-          />
+          <>
+            <AddButton
+              name={<Ionicons name="information-outline" size={24} color="#2980B9" />}
+              createFunc={() => {}}
+            />
+            <AddButton
+              name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
+              createFunc={openRegister}
+            />
+          </>
         )}
 
         <DeleteButton

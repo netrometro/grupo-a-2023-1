@@ -42,7 +42,11 @@ export const eletroStyle = StyleSheet.create({
     height: '100%',
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
-    alignItems: 'center'
+    alignItems: 'center',
+    shadowColor: '#171717',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3
   },
   registerTitle: {
     color: '#2980B9',
@@ -53,10 +57,15 @@ export const eletroStyle = StyleSheet.create({
   registerButton: {
     backgroundColor: '#2980B9',
     padding: 20,
-    borderRadius: 50
+    borderRadius: 50,
+    width: 150,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   registerButtonText: {
-    color: '#fff'
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 16
   },
 
   registerInput: {

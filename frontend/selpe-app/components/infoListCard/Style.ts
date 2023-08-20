@@ -23,6 +23,6 @@ export const infoStyle = StyleSheet.create({
   },
   text: {
     color: '#000',
-    fontWeight: '700'
+    fontWeight: '500'
   }
 });
