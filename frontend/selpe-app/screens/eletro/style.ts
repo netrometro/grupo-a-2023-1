@@ -18,10 +18,6 @@ export const eletroStyle = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold'
   },
-  list: {
-    flex: 5,
-    width: '90%'
-  },
 
   buttons: {
     flex: 1,
@@ -31,6 +27,15 @@ export const eletroStyle = StyleSheet.create({
     alignItems: 'flex-end',
     gap: 10
   },
+  infoCard: {
+    flex: 1,
+    width: '90%'
+  },
+  list: {
+    flex: 7,
+    width: '90%'
+  },
+
   registerScreen: {
     backgroundColor: '#fff',
     width: '100%',

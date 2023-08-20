@@ -17,7 +17,9 @@ import { AddButton } from '../../components/addButton/AddButton';
 import { api } from '../../services/Api';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
+import { InfoListCard } from '../../components/infoListCard/InfoListCard';
 
 export function Eletro() {
   const [eletroList, setEletroList] = useState<Array<EletroListInterface>>([]);
@@ -174,7 +176,11 @@ export function Eletro() {
       <StatusBar barStyle="dark-content" />
 
       <View style={eletroStyle.titleDiv}>
-        {!registerOpen && <Text style={eletroStyle.principalTitle}>Eletrodomesticos</Text>}
+        {!registerOpen && (
+          <Text style={eletroStyle.principalTitle}>
+            Eletrodomesticos <FontAwesome name="plug" size={24} color="#F1C40F" />
+          </Text>
+        )}
       </View>
 
       <View style={eletroStyle.buttons}>
@@ -195,6 +201,10 @@ export function Eletro() {
           }
           deleteFunc={registerOpen === false ? eletroListDelete : openRegister}
         />
+      </View>
+
+      <View style={eletroStyle.infoCard}>
+        <InfoListCard />
       </View>
 
       {registerOpen && (
