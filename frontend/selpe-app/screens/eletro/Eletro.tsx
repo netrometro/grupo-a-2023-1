@@ -1,4 +1,13 @@
-import { View, Text, SafeAreaView, StatusBar } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StatusBar,
+  TextInput,
+  TouchableOpacity,
+  Keyboard,
+  TouchableWithoutFeedback
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { eletroStyle } from './style';
 import { EletroList } from '../../components/eletrolist/EletroList';
@@ -9,22 +18,31 @@ import axios from 'axios';
 
 export function Eletro() {
   const [eletroList, setEletroList] = useState<Array<EletroListInterface>>([]);
+  const [registerOpen, setRegisterOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const eletroListRequest = async () => {
-      await api
-        .get('api/eletro')
-        .then((res) => {
-          console.log(res);
-          console.log(res.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-
     eletroListRequest();
   }, []);
+
+  const eletroListRequest = async () => {
+    await api
+      .get('api/eletro')
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  function closeKeyboard() {
+    Keyboard.dismiss();
+  }
+
+  function openRegister() {
+    setRegisterOpen(!registerOpen);
+  }
 
   return (
     <SafeAreaView>
@@ -33,10 +51,23 @@ export function Eletro() {
         <View style={eletroStyle.titleDiv}>
           <Text style={eletroStyle.principalTitle}>Eletrodomesticos</Text>
         </View>
+
         <View style={eletroStyle.buttons}>
-          <AddButton />
+          <AddButton name={''} createFunc={openRegister} />
           <DeleteButton />
         </View>
+        {!registerOpen && (
+          <TouchableWithoutFeedback onPress={closeKeyboard}>
+            <View style={eletroStyle.registerScreen}>
+              <Text style={eletroStyle.registerTitle}>Cadastro</Text>
+              <TextInput style={eletroStyle.registerInput} placeholder="Eletrodomestico" />
+              <TextInput style={eletroStyle.registerInput} placeholder="Kwh" />
+              <TouchableOpacity style={eletroStyle.registerButton}>
+                <Text style={eletroStyle.registerButtonText}>Cadastrar</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableWithoutFeedback>
+        )}
         <View style={eletroStyle.list}>
           <EletroList />
         </View>
