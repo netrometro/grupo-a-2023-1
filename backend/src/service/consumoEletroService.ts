@@ -5,6 +5,7 @@ export async function createConsumoEletro(input: consumoEletroDTO) {
   const consumoEletro = await prisma.consumoEletro.create({
     data: input,
   });
+  return consumoEletro;
 }
 
 export async function listConsumosEletros() {
