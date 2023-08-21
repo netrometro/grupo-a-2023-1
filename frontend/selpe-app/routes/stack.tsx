@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
-import { Home } from '../screens/home/Home';
-import { Eletro } from '../screens/eletro/Eletro';
+import { Home } from '../src/screens/home/Home';
+import { Eletro } from '../src/screens/eletro/Eletro';
 
 const Stack = createStackNavigator();
 

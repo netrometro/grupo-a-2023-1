@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  TextInputChangeEventData,
-  NativeSyntheticEvent
-} from 'react-native';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import TopBar from '../../components/top-bar/TopBar';
 import { styles } from './styles';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
@@ -34,8 +27,6 @@ export default function ProfilePage() {
   };
 
   const sendInfo = async () => {
-    console.log(name);
-    console.log(email);
     setEditing(false);
     const data = {
       name,

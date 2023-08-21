@@ -11,12 +11,10 @@ server.get("/healthcheck", async function () {
   return { status: "ok" };
 });
 
-server.register(cors, { origin: true });
-
 async function main() {
   server.register(cors, { origin: true });
-  server.register(eletroRoutes, { prefix: "api/eletro" });
   server.register(userRoutes, { prefix: "api/user" });
+  server.register(eletroRoutes, { prefix: "api/eletro" });
   server.register(consumoEletroRoutes, { prefix: "api/consumosEletro" });
   server.register(consumoRoutes, { prefix: "api/consumo" });
 

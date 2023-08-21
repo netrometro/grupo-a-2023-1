@@ -21,21 +21,24 @@ export default function LoginPage() {
   const [id, setId] = useState(0);
 
   const handleLogin = async () => {
-    try {
-      const data = {
-        email,
-        password
-      };
-
-      const response = await api.post('api/user/login', data);
-      const idUser = response.data.id;
-      setId(idUser);
-      navigation.navigate('Profile', {
-        id: idUser
+    const data = {
+      email,
+      password
+    };
+    let idUser: any;
+    const response = await api
+      .post('api/user/login', data)
+      .then((res) => {
+        idUser = res.data.id;
+        setId(idUser);
+        console.log(id);
+        navigation.navigate('Home', {
+          id: idUser
+        });
+      })
+      .catch((error) => {
+        alert(error);
       });
-    } catch (error) {
-      alert(error);
-    }
   };
 
   function registerScreen() {
