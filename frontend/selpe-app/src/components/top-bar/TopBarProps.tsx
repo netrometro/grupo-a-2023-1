@@ -1,0 +1,3 @@
+interface TopBarProps {
+  color?: string;
+}
