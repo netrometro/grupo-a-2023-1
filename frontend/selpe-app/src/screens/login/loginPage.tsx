@@ -16,9 +16,9 @@ import { api } from '../../services/Api';
 
 export default function LoginPage() {
   const navigation = useNavigation<StackType>();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [id, setId] = useState(0);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [id, setId] = useState<number>(0);
 
   const handleLogin = async () => {
     const data = {

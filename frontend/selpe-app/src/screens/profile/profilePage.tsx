@@ -12,9 +12,9 @@ import { StackType } from '../../routes/stackRoutes';
 export default function ProfilePage() {
   const navigation = useNavigation<StackType>();
   const route = useRoute();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [editing, setEditing] = useState(false);
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [editing, setEditing] = useState<boolean>(false);
 
   const userId = Object(route.params).id;
 
