@@ -14,7 +14,7 @@ const consumoDTO = z.object({
     required_error: "kwh is required",
     invalid_type_error: "kwh must be a number",
   }),
-  // consumos: z.array(consumoEletroDTO),
+  consumos: z.array(consumoEletroDTO),
   userId: z.number({
     required_error: "userId is required",
     invalid_type_error: "userId must be a number",
