@@ -3,8 +3,8 @@ CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "endereco" TEXT,
     "password" TEXT NOT NULL,
+    "endereco" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
