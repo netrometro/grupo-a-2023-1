@@ -1,7 +1,8 @@
+import { Prisma } from "@prisma/client";
 import { consumoDTO } from "../dto/consumoDTO";
 import prisma from "../prisma/prisma";
 
-export async function createConsumo(input: consumoDTO) {
+export async function createConsumo(input: Prisma.ConsumoUncheckedCreateInput) {
   const consumo = await prisma.consumo.create({
     data: input,
   });
@@ -9,7 +10,9 @@ export async function createConsumo(input: consumoDTO) {
 }
 
 export async function listConsumos() {
-  const consumos = await prisma.consumo.findMany();
+  const consumos = await prisma.consumo.findMany({
+    include: { consumos: true },
+  });
   return consumos;
 }
 
