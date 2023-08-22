@@ -15,7 +15,15 @@ export async function registerConsumo(
   const body = request.body;
 
   try {
-    const consumo = await createConsumo(body);
+    const consumo = await createConsumo({
+      dinheiro: body.dinheiro,
+      kwh: body.kwh,
+      userId: body.userId,
+      consumos: {
+        create: body.consumos
+      },
+      date: body.date,
+    });
     return reply.code(201).send(consumo);
   } catch (e) {
     console.log(e);
