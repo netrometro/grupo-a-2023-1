@@ -12,7 +12,7 @@ const { Screen, Navigator } = createNativeStackNavigator();
 type StackNavigation = {
   Register: undefined;
   Login: undefined;
-  Home: { id: number } | undefined;
+  Tab: { id: number } | undefined;
   Profile: { id: number } | undefined;
 };
 
@@ -23,7 +23,7 @@ export default function StackRoutes() {
       <Screen name="Register" component={RegisterPage}></Screen>
       <Screen name="Login" component={LoginPage}></Screen>
       <Screen name="Profile" component={ProfilePage} initialParams={{ id: 0 }}></Screen>
-      <Screen name="Home" component={TabComponent} initialParams={{ id: 0 }}></Screen>
+      <Screen name="Tab" component={TabComponent} initialParams={{ id: 0 }}></Screen>
     </Navigator>
   );
 }
