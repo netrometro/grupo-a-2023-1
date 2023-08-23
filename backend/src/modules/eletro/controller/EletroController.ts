@@ -24,8 +24,9 @@ export async function getEletroController(
   req: FastifyRequest,
   res: FastifyReply
 ) {
+  const id = Object(req.params);
   try {
-    const eletro = await GetAllEletro();
+    const eletro = await GetAllEletro(parseInt(id.id));
     return res.code(201).send(eletro);
   } catch (e) {
     console.log(e);

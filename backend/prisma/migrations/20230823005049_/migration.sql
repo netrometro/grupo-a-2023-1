@@ -12,6 +12,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Eletro" (
     "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
     "nome" TEXT NOT NULL,
     "kwh" INTEGER NOT NULL,
 
@@ -54,6 +55,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Eletro_nome_key" ON "Eletro"("nome");
+
+-- AddForeignKey
+ALTER TABLE "Eletro" ADD CONSTRAINT "Eletro_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Consumo" ADD CONSTRAINT "Consumo_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

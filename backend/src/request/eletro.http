@@ -1,0 +1,13 @@
+#
+GET http://localhost:3000/api/eletro
+
+###
+#
+POST http://localhost:3000/api/eletro
+Content-Type: application/json
+{
+    "nome":"ventilador",
+    "kwh":56,
+    "userId":1
+}
+###

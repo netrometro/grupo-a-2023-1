@@ -16,14 +16,17 @@ model User {
   email    String    @unique
   password String
   endereco String?
+  eletro   Eletro[]
   Consumo  Consumo[]
 }
 
 model Eletro {
   id       Int             @id @default(autoincrement())
+  userId   Int
   nome     String          @unique
   kwh      Int
   consumos ConsumoEletro[]
+  user     User            @relation(fields: [userId], references: [id])
 }
 
 model Consumo {
