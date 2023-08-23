@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "test": "tsx watch src/server.ts",
     "dev": "tsx watch src/server.ts",
-    "build": "npx tsc",
+    "build": "tsup src",
     "start": "node dist/server.js"
   },
   "keywords": [],
@@ -15,6 +18,7 @@
   "devDependencies": {
     "@types/node": "^20.5.0",
     "prisma": "^5.1.1",
+    "tsup": "^7.2.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   },

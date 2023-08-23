@@ -3,7 +3,6 @@ import userRoutes from "./routes/userRoutes";
 import consumoEletroRoutes from "./routes/consumoEletroRoutes";
 import consumoRoutes from "./routes/consumoRoutes";
 import eletroRoutes from "./routes/EletroRoutes/EletroRouts";
-import eletroRoutes from "./routes/EletroRoutes/EletroRouts";
 import cors from "@fastify/cors";
 
 const server = Fastify();
@@ -29,4 +28,3 @@ async function main() {
 }
 
 main();
->>>>>>>>> Temporary merge branch 2
