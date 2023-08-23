@@ -9,6 +9,10 @@ const EletroDTO = z.object({
     required_error: "kwh is required",
     invalid_type_error: "kwh must be a string",
   }),
+  userId: z.number({
+    required_error: "userId is required",
+    invalid_type_error: "userId must be a number",
+  }),
 });
 
 export type EletroType = z.infer<typeof EletroDTO>;
