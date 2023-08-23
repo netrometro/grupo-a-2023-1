@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StackTypes } from '../../../routes/stack';
 import { TabTypes } from '../../routes/tab';
 import TopBar from '../../components/top-bar/TopBar';
 import { AddButton } from '../../components/addButton/AddButton';
