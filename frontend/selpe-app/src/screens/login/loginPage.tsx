@@ -32,7 +32,7 @@ export default function LoginPage() {
         idUser = res.data.id;
         setId(idUser);
         console.log(id);
-        navigation.navigate('Home', {
+        navigation.navigate('Tab', {
           id: idUser
         });
       })
