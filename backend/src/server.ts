@@ -19,8 +19,11 @@ async function main() {
   server.register(consumoRoutes, { prefix: "api/consumo" });
 
   try {
-    await server.listen(3000);
-    console.log("Server ready at port 3000");
+    await server.listen({
+      host: "0.0.0.0",
+      port: process.env.PORT ? Number(process.env.PORT) : 3000,
+    });
+    console.log("Server ready");
   } catch (e) {
     console.log(e);
     process.exit(1);

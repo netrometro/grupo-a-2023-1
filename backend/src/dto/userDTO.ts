@@ -6,7 +6,7 @@ const userDTO = z.object({
       required_error: "email is required",
       invalid_type_error: "email must be a string",
     })
-    .email(),
+    .email("that is not a valid email"),
   name: z.string({
     required_error: "name is required",
     invalid_type_error: "name must be a string",
