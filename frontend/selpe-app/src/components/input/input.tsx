@@ -6,6 +6,7 @@ export default function Input({ placeholder, createfunction, security }: InputPr
   return (
     <View style={styles.container}>
       <TextInput
+        style={styles.text}
         secureTextEntry={security}
         placeholder={placeholder}
         onChange={createfunction}

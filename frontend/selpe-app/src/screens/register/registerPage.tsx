@@ -44,10 +44,10 @@ export default function RegisterPage() {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.topBar}>
         <AntDesign name="close" size={22} color="#BDBDBD"></AntDesign>
-        <TopBar color="#2980B9"></TopBar>
+        <TopBar color="#FFEAA7"></TopBar>
         <TouchableOpacity onPress={loginScreen}>
           <Text style={styles.text}>Login</Text>
         </TouchableOpacity>

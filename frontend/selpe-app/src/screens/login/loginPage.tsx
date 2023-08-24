@@ -45,7 +45,7 @@ export default function LoginPage() {
     navigation.navigate('Register');
   }
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.topBar}>
         <TopBar color="#2980B9"></TopBar>
       </View>
