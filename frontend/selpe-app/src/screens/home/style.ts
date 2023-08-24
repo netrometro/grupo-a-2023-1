@@ -2,11 +2,21 @@ import { StyleSheet } from 'react-native';
 
 export const consumoStyle = StyleSheet.create({
   container: {
-    backgroundColor: '#2980B9',
+    backgroundColor: '#74B9FF',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     gap: 10
+  },
+  topBar: {
+    width: '100%',
+    marginTop: 15,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingRight: 15,
+    paddingLeft: 15
   },
   titleDiv: {
     flex: 1,
@@ -77,4 +87,3 @@ export const consumoStyle = StyleSheet.create({
     borderRadius: 20
   }
 });
-

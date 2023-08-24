@@ -176,12 +176,14 @@ export const Home = () => {
     <SafeAreaView style={consumoStyle.container}>
       <StatusBar barStyle="dark-content" />
       <View>
-        <TopBar></TopBar>
+        <View style={consumoStyle.topBar}>
+          <TopBar color="#FFEAA7"></TopBar>
+        </View>
         <View>
           <Text>Bem-vindo ao Selpe</Text>
           <Text>Consuma sua energia de forma mais eficiente</Text>
         </View>
-        <View>Meus Consumos</View>
+        <Text>Meus Consumos</Text>
         <AddButton
           name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
           createFunc={openRegister}

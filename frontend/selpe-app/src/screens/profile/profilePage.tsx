@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, SafeAreaView } from 'react-native';
 import TopBar from '../../components/top-bar/TopBar';
 import { styles } from './styles';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
@@ -49,19 +49,19 @@ export default function ProfilePage() {
   };
 
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <View style={styles.topBar}>
         <TouchableOpacity>
-          <Ionicons name="arrow-back" size={24} color="black" />
+          <Ionicons name="arrow-back" size={24} color="#BDBDBD" />
         </TouchableOpacity>
-        <TopBar color="white"></TopBar>
+        <TopBar color="#FFEAA7"></TopBar>
         <TouchableOpacity onPress={edit}>
-          <MaterialIcons name="edit" size={24} color="black" />
+          <MaterialIcons name="edit" size={24} color="#BDBDBD" />
         </TouchableOpacity>
       </View>
       <View style={styles.account}>
         <View style={styles.username}>
-          <MaterialIcons name="account-circle" size={60} color="#BDBDBD" />
+          <MaterialIcons name="account-circle" size={60} color="#2980B9" />
           {editing ? (
             <View style={{ flexDirection: 'row' }}>
               <TextInput value={name} onChangeText={setName} style={styles.textInput}></TextInput>
@@ -76,7 +76,7 @@ export default function ProfilePage() {
           )}
         </View>
         <View style={styles.email}>
-          <MaterialIcons name="email" size={21} color="grey" />
+          <MaterialIcons name="email" size={21} color="#2980B9" />
           {editing ? (
             <TextInput
               value={email}
@@ -94,23 +94,23 @@ export default function ProfilePage() {
       <View id="options">
         <Option
           createfunc={() => {}}
-          icon={<MaterialIcons name="history" size={22} color="grey" />}
+          icon={<MaterialIcons name="history" size={22} color="#2980B9" />}
           name="Histórico"
         ></Option>
         <Separator />
         <Option
           createfunc={() => {}}
-          icon={<MaterialIcons name="settings" size={22} color="grey" />}
+          icon={<MaterialIcons name="settings" size={22} color="#2980B9" />}
           name="Configurações"
         ></Option>
         <Separator />
         <Option
           createfunc={logout}
-          icon={<MaterialIcons name="logout" size={22} color="grey" />}
+          icon={<MaterialIcons name="logout" size={22} color="#2980B9" />}
           name="Sair"
         ></Option>
       </View>
       <Separator />
-    </View>
+    </SafeAreaView>
   );
 }

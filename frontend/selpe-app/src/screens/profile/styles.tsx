@@ -1,12 +1,15 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#74B9FF'
+  },
   topBar: {
     width: '100%',
     height: 100,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#2980B9',
     paddingTop: 40,
     paddingLeft: 15,
     paddingRight: 15,
@@ -36,7 +39,7 @@ export const styles = StyleSheet.create({
   },
   textEmail: {
     fontSize: 12,
-    color: 'grey',
+    color: 'black',
     paddingLeft: 10
   },
   textInputEmail: {

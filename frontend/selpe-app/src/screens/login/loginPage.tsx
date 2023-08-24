@@ -47,7 +47,7 @@ export default function LoginPage() {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
-        <TopBar color="#2980B9"></TopBar>
+        <TopBar color="#FFEAA7"></TopBar>
       </View>
       <View style={styles.form}>
         <Input
