@@ -1,9 +1,15 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { CreateEletro } from "../services/createEletro";
-import { EletroType } from "../dtos/CreateEletroDTO";
-import { GetAllEletro, GetEletroById } from "../services/getEletro";
-import { UpdateEletro } from "../services/updateEletro";
-import { DeleteAllEletro, DeleteEletroById } from "../services/deleteEletro";
+import { CreateEletro } from "../modules/eletro/services/createEletro";
+import { EletroType } from "../dto/CreateEletroDTO";
+import {
+  GetAllEletro,
+  GetEletroById,
+} from "../modules/eletro/services/getEletro";
+import { UpdateEletro } from "../modules/eletro/services/updateEletro";
+import {
+  DeleteAllEletro,
+  DeleteEletroById,
+} from "../modules/eletro/services/deleteEletro";
 
 export async function createEletroController(
   req: FastifyRequest<{ Body: EletroType }>,
@@ -24,8 +30,9 @@ export async function getEletroController(
   req: FastifyRequest,
   res: FastifyReply
 ) {
+  const id = Object(req.params);
   try {
-    const eletro = await GetAllEletro();
+    const eletro = await GetAllEletro(parseInt(id.id));
     return res.code(201).send(eletro);
   } catch (e) {
     console.log(e);

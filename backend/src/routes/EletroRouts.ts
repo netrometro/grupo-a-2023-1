@@ -5,13 +5,13 @@ import {
   getEletroByIdController,
   getEletroController,
   putEletroController,
-} from "../../modules/eletro/controller/EletroController";
-import { DeleteAllEletro } from "../../modules/eletro/services/deleteEletro";
+} from "../controller/EletroController";
+import { DeleteAllEletro } from "../modules/eletro/services/deleteEletro";
 
 async function eletroRoutes(server: FastifyInstance) {
   server.post("/", createEletroController);
 
-  server.get("/", getEletroController);
+  server.get("/eletros/:id", getEletroController);
 
   server.get("/:id", getEletroByIdController);
 

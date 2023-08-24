@@ -18,12 +18,12 @@ import { AddButton } from '../../components/addButton/AddButton';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import axios from 'axios';
 import { InfoListCard } from '../../components/infoListCard/InfoListCard';
 import { api } from '../../services/Api';
+import { useRoute } from '@react-navigation/native';
 
 export function Eletro() {
+  const route = useRoute();
   const [eletroList, setEletroList] = useState<Array<EletroListInterface>>([]);
   const [registerOpen, setRegisterOpen] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -32,9 +32,9 @@ export function Eletro() {
   const [eletroKwh, setEletroKwh] = useState<number>(0);
   const [eletroListEdit, setEletroListEdit] = useState<EletroListInterface>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
-
+  const userId = Object(route.params).id;
   useEffect(() => {
-    eletroListRequest();
+    eletroListRequest(userId);
     setEletroName(eletroListEdit?.nome != null ? eletroListEdit?.nome : '');
     setEletroKwh(eletroListEdit?.kwh != null ? eletroListEdit?.kwh : 0);
   }, [reloadEffect]);
@@ -51,14 +51,15 @@ export function Eletro() {
 
   const data: EletroListInterface = {
     // data dos inputs
+    userId: userId,
     nome: eletroName,
     kwh: eletroKwh
   };
 
-  const eletroListRequest = async () => {
+  const eletroListRequest = async (id: number) => {
     //lista todos os eletros
     await api
-      .get('api/eletro')
+      .get(`api/eletro/eletros/${id}`)
       .then((res) => {
         console.log(res);
         console.log(res.data);

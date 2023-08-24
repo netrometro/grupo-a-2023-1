@@ -2,10 +2,12 @@ import { Eletro } from "@prisma/client";
 import { prisma } from "../../../prisma/client";
 
 import { AppError } from "../../../error/AppError";
-import { EletroType } from "../dtos/CreateEletroDTO";
+import { EletroType } from "../../../dto/CreateEletroDTO";
 
-export async function GetAllEletro() {
-  const response = await prisma.eletro.findMany();
+export async function GetAllEletro(userId: number) {
+  const response = await prisma.eletro.findMany({
+    where: { userId },
+  });
   return response;
 }
 

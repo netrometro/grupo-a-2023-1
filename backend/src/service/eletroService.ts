@@ -1,5 +1,5 @@
-import { prisma } from "../../../prisma/client";
-import { EletroType } from "../../../dto/CreateEletroDTO";
+import { EletroType } from "../dto/CreateEletroDTO";
+import prisma from "./../prisma/prisma";
 
 export async function CreateEletro(body: EletroType) {
   const eletro = await prisma.eletro.create({
