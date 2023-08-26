@@ -21,6 +21,10 @@ import { consumoStyle } from './style';
 import { useRoute } from '@react-navigation/native';
 import { styles } from '../register/style';
 import { Ionicons } from '@expo/vector-icons';
+import { DeleteButton } from '../../components/deleteButton/DeleteButton';
+import { Feather } from '@expo/vector-icons';
+import { InfoListCard } from '../../components/infoListCard/InfoListCard';
+// import DateTimePicker from '@react-native-community/datetimepicker';
 
 export const Home = () => {
   const navigation = useNavigation<TabTypes>();
@@ -175,27 +179,60 @@ export const Home = () => {
   return (
     <SafeAreaView style={consumoStyle.container}>
       <StatusBar barStyle="dark-content" />
+
       <View style={{ alignItems: 'center' }}>
         <View style={{ marginBottom: 38 }} />
+
         <TopBar color="#FFEAA7" />
+
         <View style={consumoStyle.modal}>
           <Text style={consumoStyle.modalTitle}>Bem-vindo ao</Text>
           <Text style={consumoStyle.modalTitle}>Selpe</Text>
           <Text style={consumoStyle.modalBody}>Consuma sua energia de forma mais eficiente</Text>
         </View>
+
         <View>
           <Text style={consumoStyle.meusConsumos}>Meus Consumos</Text>
         </View>
-        <AddButton
-          name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
-          createFunc={openRegister}
-        ></AddButton>
+
+        <View style={consumoStyle.buttons}>
+          {!registerOpen && (
+            <>
+              <AddButton
+                name={<Ionicons name="information-outline" size={24} color="#FFEAA7" />}
+                createFunc={() => {}}
+              />
+
+              <AddButton
+                name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
+                createFunc={openRegister}
+              />
+            </>
+          )}
+
+          <DeleteButton
+            name={
+              registerOpen === false ? (
+                <Feather name="trash" size={24} color="#FFEAA7" />
+              ) : (
+                <Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />
+              )
+            }
+            deleteFunc={registerOpen === false ? consumoListDelete : openRegister}
+          />
+        </View>
+
+        {/* <View style={consumoStyle.infoCard}>
+          <InfoListCard />
+        </View> */}
+
         {registerOpen && (
           <TouchableWithoutFeedback>
             <View style={consumoStyle.registerScreen}>
               <Text style={consumoStyle.registerTitle}>
                 {isEdit == false ? 'Adicionar' : 'Editar'}
               </Text>
+
               <TextInput
                 style={consumoStyle.registerInput}
                 placeholder="Data: 2013-02-14T13:15:03-08:00"
