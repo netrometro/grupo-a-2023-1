@@ -1,7 +1,6 @@
 import axios from 'axios';
+import { API_URL } from './API_URL';
 
 export const api = axios.create({
-  baseURL: 'https://selpedeploy-api.onrender.com/'
+  baseURL: API_URL
 });
-
-//baseURL: 'https://selpedeploy-api.onrender.com/'

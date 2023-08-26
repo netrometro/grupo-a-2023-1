@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const deleteStyle = StyleSheet.create({
   container: {
-    backgroundColor: '#EB4D4B',
+    backgroundColor: '#E17055',
     padding: 12,
     borderRadius: 50,
     width: 100,

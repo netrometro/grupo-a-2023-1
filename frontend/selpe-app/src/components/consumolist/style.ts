@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native';
 export const listStyle = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#2980B9',
+    color: '#FFEAA7',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -16,5 +17,8 @@ export const listStyle = StyleSheet.create({
     gap: 10,
     alignContent: 'center',
     justifyContent: 'center'
+  },
+  itemsText: {
+    color: '#FFEAA7'
   }
 });
