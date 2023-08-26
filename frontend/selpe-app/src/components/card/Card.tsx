@@ -1,18 +1,19 @@
 import { View, Text } from 'react-native';
 import React from 'react';
+import { cardStyle } from './Style';
 
 interface CardInterface {
   label: string;
   content: string;
-  width: number | string;
+  width: number;
 }
 
-export const Card = ({ label, content }: CardInterface) => {
+export const Card = ({ label, content, width }: CardInterface) => {
   return (
-    <View>
-      <Text>{label}</Text>
-      <View>
-        <Text>{content}</Text>
+    <View style={cardStyle.container}>
+      <Text style={cardStyle.label}>{label}</Text>
+      <View style={[cardStyle.contentView, { width: width }]}>
+        <Text style={cardStyle.content}>{content}</Text>
       </View>
     </View>
   );

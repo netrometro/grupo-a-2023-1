@@ -21,6 +21,7 @@ import { useRoute } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
 import { Feather } from '@expo/vector-icons';
+import { Card } from '../../components/card/Card';
 
 // import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -247,6 +248,7 @@ export const Home = () => {
         <TouchableWithoutFeedback>
           <View style={consumoStyle.registerScreen}>
             <Text style={consumoStyle.registerTitle}>Consumo - xx</Text>
+            <Card label={'Data'} content={'Data'} width={200} />
           </View>
         </TouchableWithoutFeedback>
       )}
