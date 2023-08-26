@@ -181,7 +181,9 @@ export const Home = () => {
           <Text>Bem-vindo ao Selpe</Text>
           <Text>Consuma sua energia de forma mais eficiente</Text>
         </View>
-        <View>Meus Consumos</View>
+        <View>
+          <Text>Meus Consumos</Text>
+        </View>
         <AddButton
           name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
           createFunc={openRegister}
