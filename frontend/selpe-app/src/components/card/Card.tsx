@@ -5,7 +5,7 @@ import { cardStyle } from './Style';
 interface CardInterface {
   label: string;
   content: string;
-  width: number;
+  width?: number;
 }
 
 export const Card = ({ label, content, width }: CardInterface) => {

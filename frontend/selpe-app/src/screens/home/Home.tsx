@@ -248,7 +248,15 @@ export const Home = () => {
         <TouchableWithoutFeedback>
           <View style={consumoStyle.registerScreen}>
             <Text style={consumoStyle.registerTitle}>Consumo - xx</Text>
-            <Card label={'Data'} content={'Data'} width={200} />
+            <View style={consumoStyle.seeCard}>
+              <Card label={'Data'} content={'Data'} width={200} />
+              <Card label={'Maior consumo'} content={'Maior consumo'} />
+              <Card label={'Menor consumo'} content={'Menor consumo'} />
+              <View style={consumoStyle.seeCardTotal}>
+                <Card label={'Total kwh'} content={'Total kwh'} width={100} />
+                <Card label={'Total Gasto'} content={'Total Gasto'} width={100} />
+              </View>
+            </View>
           </View>
         </TouchableWithoutFeedback>
       )}

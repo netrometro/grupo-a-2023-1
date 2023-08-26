@@ -118,5 +118,18 @@ export const consumoStyle = StyleSheet.create({
     fontSize: 24,
     fontStyle: 'normal',
     fontWeight: '600'
+  },
+
+  seeCard: {
+    marginTop: 30,
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 10
+  },
+
+  seeCardTotal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 });
