@@ -28,6 +28,7 @@ export const Home = () => {
   const navigation = useNavigation<TabTypes>();
   const [consumoList, setConsumoList] = useState<Array<ConsumoListInterface>>([]);
   const [registerOpen, setRegisterOpen] = useState<boolean>(false);
+  const [seeOpen, setSeeOpen] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [date, setDate] = useState<Date>(new Date('2013-02-14T13:15:03-08:00'));
   const [kwh, setKwh] = useState<number>(0);
@@ -146,20 +147,6 @@ export const Home = () => {
       });
   };
 
-  const consumoListDelete = async () => {
-    await api
-      .delete('api/consumo')
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        reloadPag();
-        console.log('deletou');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
   const consumoListDeleteById = async (id: number) => {
     await api
       .delete(`api/consumo/${id}`)
@@ -174,13 +161,15 @@ export const Home = () => {
       });
   };
 
+  function openVisual() {
+    setSeeOpen(!seeOpen);
+  }
+
   return (
     <SafeAreaView style={consumoStyle.container}>
       <StatusBar barStyle="dark-content" />
 
       <View style={{ alignItems: 'center' }}>
-        <View style={{ marginBottom: 38 }} />
-
         <TopBar color="#FFEAA7" />
 
         <View style={consumoStyle.modal}>
@@ -195,37 +184,19 @@ export const Home = () => {
 
         <View style={consumoStyle.buttons}>
           {!registerOpen && (
-            <>
-              <AddButton
-                name={<Ionicons name="information-outline" size={24} color="#FFEAA7" />}
-                createFunc={() => {}}
-                background={''}
-              />
-
-              <AddButton
-                name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
-                createFunc={openRegister}
-                background={''}
-              />
-            </>
+            <AddButton
+              name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
+              createFunc={openRegister}
+              background={''}
+            />
           )}
-
-          <DeleteButton
-            name={
-              registerOpen === false ? (
-                <Feather name="trash" size={24} color="#FFEAA7" />
-              ) : (
-                <Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />
-              )
-            }
-            deleteFunc={registerOpen === false ? consumoListDelete : openRegister}
-          />
+          {registerOpen && (
+            <DeleteButton
+              name={<Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />}
+              deleteFunc={registerOpen === true ? openRegister : () => {}}
+            />
+          )}
         </View>
-
-        {/* <View style={consumoStyle.infoCard}>
-          <InfoListCard />
-        </View> */}
-
         {registerOpen && (
           <TouchableWithoutFeedback>
             <View style={consumoStyle.registerScreen}>
@@ -265,6 +236,14 @@ export const Home = () => {
             </View>
           </TouchableWithoutFeedback>
         )}
+
+        {seeOpen && (
+          <TouchableWithoutFeedback>
+            <View style={consumoStyle.registerScreen}>
+              <Text style={consumoStyle.registerTitle}>Consumo - xx</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        )}
         <View style={consumoStyle.list}>
           <ScrollView>
             {consumoList &&
@@ -275,6 +254,7 @@ export const Home = () => {
                   dinheiro={item.dinheiro}
                   editFunc={() => editRegister(item.id !== undefined ? item.id : 0)}
                   deleteFunc={() => consumoListDeleteById(item.id !== undefined ? item.id : 0)}
+                  seeConsume={openVisual}
                 />
               ))}
           </ScrollView>
