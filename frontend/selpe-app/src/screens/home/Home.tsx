@@ -21,6 +21,7 @@ import { consumoStyle } from './style';
 import { useRoute } from '@react-navigation/native';
 import { styles } from '../register/style';
 import { Ionicons } from '@expo/vector-icons';
+import ModalTips from '../../components/modal/Modal';
 
 export const Home = () => {
   const navigation = useNavigation<TabTypes>();
@@ -174,11 +175,12 @@ export const Home = () => {
 
   return (
     <SafeAreaView style={consumoStyle.container}>
+      <View style={consumoStyle.topBar}>
+        <TopBar color="#FFEAA7"></TopBar>
+        <ModalTips></ModalTips>
+      </View>
       <StatusBar barStyle="dark-content" />
       <View>
-        <View style={consumoStyle.topBar}>
-          <TopBar color="#FFEAA7"></TopBar>
-        </View>
         <View>
           <Text>Bem-vindo ao Selpe</Text>
           <Text>Consuma sua energia de forma mais eficiente</Text>

@@ -1,17 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 export const consumoStyle = StyleSheet.create({
-  container: {
-    backgroundColor: '#74B9FF',
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 10
-  },
+  container: { backgroundColor: '#74B9FF', flex: 1 },
   topBar: {
     width: '100%',
-    marginTop: 15,
-    height: 100,
+    height: 80,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
