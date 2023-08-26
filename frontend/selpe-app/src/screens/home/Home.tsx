@@ -169,9 +169,8 @@ export const Home = () => {
     <SafeAreaView style={consumoStyle.container}>
       <StatusBar barStyle="dark-content" />
 
-      <View style={{ alignItems: 'center' }}>
-        <TopBar color="#FFEAA7" />
-
+      <TopBar color="#FFEAA7" />
+      <View style={consumoStyle.titleDiv}>
         <View style={consumoStyle.modal}>
           <Text style={consumoStyle.modalTitle}>Bem-vindo ao</Text>
           <Text style={consumoStyle.modalTitle}>Selpe</Text>
@@ -181,84 +180,91 @@ export const Home = () => {
         <View>
           <Text style={consumoStyle.meusConsumos}>Meus Consumos</Text>
         </View>
+      </View>
 
-        <View style={consumoStyle.buttons}>
-          {!registerOpen && (
-            <AddButton
-              name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
-              createFunc={openRegister}
-              background={''}
-            />
-          )}
-          {registerOpen && (
-            <DeleteButton
-              name={<Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />}
-              deleteFunc={registerOpen === true ? openRegister : () => {}}
-            />
-          )}
-        </View>
+      <View style={consumoStyle.buttons}>
+        {!registerOpen && !seeOpen && (
+          <AddButton
+            name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
+            createFunc={openRegister}
+            background={'#FFEAA7'}
+          />
+        )}
         {registerOpen && (
-          <TouchableWithoutFeedback>
-            <View style={consumoStyle.registerScreen}>
-              <Text style={consumoStyle.registerTitle}>
-                {isEdit == false ? 'Adicionar' : 'Editar'}
-              </Text>
-
-              <TextInput
-                style={consumoStyle.registerInput}
-                placeholder="Data: 2013-02-14T13:15:03-08:00"
-                onChangeText={(e) => handleChangeDate(e)}
-                // value={String(date)}
-              />
-
-              <TextInput
-                style={consumoStyle.registerInput}
-                placeholder="Dinheiro: 245.00"
-                onChangeText={(e) => handleChangeDinheiro(e)}
-                // value={dinheiro.toString()}
-              />
-
-              <TextInput
-                style={consumoStyle.registerInput}
-                placeholder="Kwh: 128"
-                onChangeText={(e) => handleChangeKwh(e)}
-                // value={kwh.toString()}
-              />
-
-              <TouchableOpacity
-                style={consumoStyle.registerButton}
-                onPress={isEdit === false ? consumoListCreate : () => consumoListPut(isId)}
-              >
-                <Text style={consumoStyle.registerButtonText}>
-                  {isEdit == false ? 'Cadastrar' : 'Editar'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableWithoutFeedback>
+          <DeleteButton
+            name={<Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />}
+            deleteFunc={openRegister}
+          />
         )}
-
         {seeOpen && (
-          <TouchableWithoutFeedback>
-            <View style={consumoStyle.registerScreen}>
-              <Text style={consumoStyle.registerTitle}>Consumo - xx</Text>
-            </View>
-          </TouchableWithoutFeedback>
+          <DeleteButton
+            name={<Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />}
+            deleteFunc={openVisual}
+          />
         )}
-        <View style={consumoStyle.list}>
-          <ScrollView>
-            {consumoList &&
-              consumoList.map((item) => (
-                <ConsumoList
-                  date={item.date}
-                  kwh={item.kwh}
-                  dinheiro={item.dinheiro}
-                  editFunc={() => editRegister(item.id !== undefined ? item.id : 0)}
-                  deleteFunc={() => consumoListDeleteById(item.id !== undefined ? item.id : 0)}
-                  seeConsume={openVisual}
-                />
-              ))}
-          </ScrollView>
-        </View>
+      </View>
+      {registerOpen && (
+        <TouchableWithoutFeedback>
+          <View style={consumoStyle.registerScreen}>
+            <Text style={consumoStyle.registerTitle}>
+              {isEdit == false ? 'Adicionar' : 'Editar'}
+            </Text>
+
+            <TextInput
+              style={consumoStyle.registerInput}
+              placeholder="Data: 2013-02-14T13:15:03-08:00"
+              onChangeText={(e) => handleChangeDate(e)}
+              // value={String(date)}
+            />
+
+            <TextInput
+              style={consumoStyle.registerInput}
+              placeholder="Dinheiro: 245.00"
+              onChangeText={(e) => handleChangeDinheiro(e)}
+              // value={dinheiro.toString()}
+            />
+
+            <TextInput
+              style={consumoStyle.registerInput}
+              placeholder="Kwh: 128"
+              onChangeText={(e) => handleChangeKwh(e)}
+              // value={kwh.toString()}
+            />
+
+            <TouchableOpacity
+              style={consumoStyle.registerButton}
+              onPress={isEdit === false ? consumoListCreate : () => consumoListPut(isId)}
+            >
+              <Text style={consumoStyle.registerButtonText}>
+                {isEdit == false ? 'Cadastrar' : 'Editar'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableWithoutFeedback>
+      )}
+
+      {seeOpen && (
+        <TouchableWithoutFeedback>
+          <View style={consumoStyle.registerScreen}>
+            <Text style={consumoStyle.registerTitle}>Consumo - xx</Text>
+          </View>
+        </TouchableWithoutFeedback>
+      )}
+
+      <View style={consumoStyle.list}>
+        <ScrollView>
+          {consumoList &&
+            consumoList.map((item) => (
+              <ConsumoList
+                date={item.date}
+                kwh={item.kwh}
+                dinheiro={item.dinheiro}
+                editFunc={() => editRegister(item.id !== undefined ? item.id : 0)}
+                deleteFunc={() => consumoListDeleteById(item.id !== undefined ? item.id : 0)}
+                seeConsume={openVisual}
+              />
+            ))}
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

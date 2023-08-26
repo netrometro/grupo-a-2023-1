@@ -9,9 +9,9 @@ export const consumoStyle = StyleSheet.create({
     gap: 10
   },
   titleDiv: {
-    flex: 1,
-    alignContent: 'center',
-    marginTop: 80
+    flex: 2,
+    flexDirection: 'column',
+    alignContent: 'center'
   },
   principalTitle: {
     color: '#FFEAA7',
@@ -20,7 +20,7 @@ export const consumoStyle = StyleSheet.create({
   },
 
   buttons: {
-    flex: 1,
+    flex: 2,
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
