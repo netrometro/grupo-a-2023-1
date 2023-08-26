@@ -1,9 +1,7 @@
 import {
   View,
   Text,
-  Button,
   ScrollView,
-  Keyboard,
   TouchableOpacity,
   TextInput,
   TouchableWithoutFeedback,
@@ -19,11 +17,11 @@ import { ConsumoList } from '../../components/consumolist/ConsumoList';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { consumoStyle } from './style';
 import { useRoute } from '@react-navigation/native';
-import { styles } from '../register/style';
+
 import { Ionicons } from '@expo/vector-icons';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
 import { Feather } from '@expo/vector-icons';
-import { InfoListCard } from '../../components/infoListCard/InfoListCard';
+
 // import DateTimePicker from '@react-native-community/datetimepicker';
 
 export const Home = () => {

@@ -33,6 +33,7 @@ export function Eletro() {
   const [eletroListEdit, setEletroListEdit] = useState<EletroListInterface>();
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const userId = Object(route.params).id;
+
   useEffect(() => {
     eletroListRequest(userId);
     setEletroName(eletroListEdit?.nome != null ? eletroListEdit?.nome : '');
@@ -181,7 +182,7 @@ export function Eletro() {
       <View style={eletroStyle.titleDiv}>
         {!registerOpen && (
           <Text style={eletroStyle.principalTitle}>
-            Eletrodomesticos <FontAwesome name="plug" size={24} color="#F1C40F" />
+            Eletrodomesticos <FontAwesome name="plug" size={24} color="#FFEAA7" />
           </Text>
         )}
       </View>
@@ -224,13 +225,11 @@ export function Eletro() {
               style={eletroStyle.registerInput}
               placeholder="Eletrodomestico"
               onChangeText={(e) => handleChangeName(e)}
-              value={eletroName}
             />
             <TextInput
               style={eletroStyle.registerInput}
               placeholder="Kwh"
               onChangeText={(e) => handleChangeKwh(e)}
-              value={eletroKwh.toString()}
             />
             <TouchableOpacity
               style={eletroStyle.registerButton}

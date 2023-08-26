@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const eletroStyle = StyleSheet.create({
   container: {
-    backgroundColor: '#2980B9',
+    backgroundColor: '#74B9FF',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
@@ -14,7 +14,7 @@ export const eletroStyle = StyleSheet.create({
     marginTop: 80
   },
   principalTitle: {
-    color: '#fff',
+    color: '#FFEAA7',
     fontSize: 30,
     fontWeight: 'bold'
   },
