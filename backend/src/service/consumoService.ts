@@ -20,6 +20,7 @@ export async function listConsumos() {
 export async function listConsumo(input: Number) {
   const consumo = await prisma.consumo.findUnique({
     where: { id: Number(input) },
+    include: { consumos: true },
   });
 
   if (!consumo) {
