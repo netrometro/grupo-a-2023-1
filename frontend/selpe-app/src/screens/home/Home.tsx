@@ -199,11 +199,13 @@ export const Home = () => {
               <AddButton
                 name={<Ionicons name="information-outline" size={24} color="#FFEAA7" />}
                 createFunc={() => {}}
+                background={''}
               />
 
               <AddButton
                 name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
                 createFunc={openRegister}
+                background={''}
               />
             </>
           )}
