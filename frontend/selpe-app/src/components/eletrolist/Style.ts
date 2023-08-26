@@ -9,7 +9,13 @@ export const listStyle = StyleSheet.create({
     justifyContent: 'space-around',
     padding: 12,
     borderRadius: 12,
-    marginTop: 14
+    marginTop: 14,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    borderWidth: 1,
+    borderColor: '#FFEAA7'
   },
 
   text: {
