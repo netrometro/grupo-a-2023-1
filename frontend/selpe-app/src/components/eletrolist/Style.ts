@@ -21,5 +21,11 @@ export const listStyle = StyleSheet.create({
   text: {
     color: '#FFEAA7',
     fontWeight: '500'
+  },
+  textView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '40%'
   }
 });

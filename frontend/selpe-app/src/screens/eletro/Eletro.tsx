@@ -94,6 +94,7 @@ export function Eletro() {
         console.log(res);
         console.log(res.data);
         reloadPag();
+        setRegisterOpen(!registerOpen);
         console.log('cadastrou');
       })
       .catch((error) => {
@@ -193,10 +194,12 @@ export function Eletro() {
             <AddButton
               name={<Ionicons name="information-outline" size={24} color="#2980B9" />}
               createFunc={() => {}}
+              background={'#FFEAA7'}
             />
             <AddButton
               name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
               createFunc={openRegister}
+              background={'#FFEAA7'}
             />
           </>
         )}

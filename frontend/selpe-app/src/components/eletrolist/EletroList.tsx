@@ -14,10 +14,16 @@ interface EletroListProps {
 export const EletroList = ({ name, kwh, editFunc, deleteFunc }: EletroListProps) => {
   return (
     <View style={listStyle.container}>
-      <FontAwesome5 name="pen" size={16} color="#FFEAA7" onPress={editFunc} />
-      <Text style={listStyle.text}>{name}</Text>
-      <Text style={listStyle.text}>{kwh}</Text>
-      <Feather name="x" size={28} color="#E17055" onPress={deleteFunc} />
+      <View>
+        <FontAwesome5 name="pen" size={16} color="#FFEAA7" onPress={editFunc} />
+      </View>
+      <View style={listStyle.textView}>
+        <Text style={listStyle.text}>{name}</Text>
+        <Text style={listStyle.text}>{kwh}</Text>
+      </View>
+      <View>
+        <Feather name="x" size={28} color="#E17055" onPress={deleteFunc} />
+      </View>
     </View>
   );
 };
