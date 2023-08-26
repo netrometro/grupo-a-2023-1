@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const consumoStyle = StyleSheet.create({
   container: {
-    backgroundColor: '#2980B9',
+    backgroundColor: '#74B9FF',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
@@ -14,7 +14,7 @@ export const consumoStyle = StyleSheet.create({
     marginTop: 80
   },
   principalTitle: {
-    color: '#fff',
+    color: '#FFEAA7',
     fontSize: 30,
     fontWeight: 'bold'
   },
@@ -37,7 +37,7 @@ export const consumoStyle = StyleSheet.create({
   },
 
   registerScreen: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFEAA7',
     width: '100%',
     height: '100%',
     borderTopRightRadius: 50,
@@ -69,11 +69,11 @@ export const consumoStyle = StyleSheet.create({
   },
 
   registerInput: {
-    backgroundColor: '#F6F6F6',
+    backgroundColor: '#2980B9',
     width: '90%',
     padding: 20,
     margin: 20,
-    color: '#000',
+    color: '#FFEAA7',
     borderRadius: 20
   },
 

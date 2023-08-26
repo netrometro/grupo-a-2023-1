@@ -187,7 +187,7 @@ export const Home = () => {
           <Text style={consumoStyle.meusConsumos}>Meus Consumos</Text>
         </View>
         <AddButton
-          name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
+          name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
           createFunc={openRegister}
         ></AddButton>
         {registerOpen && (
