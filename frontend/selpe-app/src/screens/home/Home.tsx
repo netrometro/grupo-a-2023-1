@@ -175,13 +175,17 @@ export const Home = () => {
   return (
     <SafeAreaView style={consumoStyle.container}>
       <StatusBar barStyle="dark-content" />
-      <View>
-        <TopBar></TopBar>
-        <View>
-          <Text>Bem-vindo ao Selpe</Text>
-          <Text>Consuma sua energia de forma mais eficiente</Text>
+      <View style={{ alignItems: 'center' }}>
+        <View style={{ marginBottom: 38 }} />
+        <TopBar color="#FFEAA7" />
+        <View style={consumoStyle.modal}>
+          <Text style={consumoStyle.modalTitle}>Bem-vindo ao</Text>
+          <Text style={consumoStyle.modalTitle}>Selpe</Text>
+          <Text style={consumoStyle.modalBody}>Consuma sua energia de forma mais eficiente</Text>
         </View>
-        <View>Meus Consumos</View>
+        <View>
+          <Text style={consumoStyle.meusConsumos}>Meus Consumos</Text>
+        </View>
         <AddButton
           name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
           createFunc={openRegister}
