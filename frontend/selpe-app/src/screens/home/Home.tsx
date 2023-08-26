@@ -198,23 +198,23 @@ export const Home = () => {
               </Text>
               <TextInput
                 style={consumoStyle.registerInput}
-                placeholder="Data"
+                placeholder="Data: 2013-02-14T13:15:03-08:00"
                 onChangeText={(e) => handleChangeDate(e)}
-                value={String(date)}
+                // value={String(date)}
               />
 
               <TextInput
                 style={consumoStyle.registerInput}
-                placeholder="Dinheiro"
+                placeholder="Dinheiro: 245.00"
                 onChangeText={(e) => handleChangeDinheiro(e)}
-                value={dinheiro.toString()}
+                // value={dinheiro.toString()}
               />
 
               <TextInput
                 style={consumoStyle.registerInput}
-                placeholder="Kwh"
+                placeholder="Kwh: 128"
                 onChangeText={(e) => handleChangeKwh(e)}
-                value={kwh.toString()}
+                // value={kwh.toString()}
               />
 
               <TouchableOpacity
