@@ -162,8 +162,9 @@ export const Home = () => {
       });
   };
 
-  function openVisual() {
+  function openVisual(id: number) {
     setSeeOpen(!seeOpen);
+    consumoListRequestById(id);
   }
 
   return (
@@ -200,7 +201,7 @@ export const Home = () => {
         {seeOpen && (
           <DeleteButton
             name={<Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />}
-            deleteFunc={openVisual}
+            deleteFunc={() => setSeeOpen(!seeOpen)}
           />
         )}
       </View>
@@ -248,15 +249,21 @@ export const Home = () => {
         <TouchableWithoutFeedback>
           <View style={consumoStyle.registerScreen}>
             <Text style={consumoStyle.registerTitle}>Consumo - xx</Text>
-            <View style={consumoStyle.seeCard}>
-              <Card label={'Data'} content={'Data'} width={200} />
-              <Card label={'Maior consumo'} content={'Maior consumo'} />
-              <Card label={'Menor consumo'} content={'Menor consumo'} />
-              <View style={consumoStyle.seeCardTotal}>
-                <Card label={'Total kwh'} content={'Total kwh'} width={100} />
-                <Card label={'Total Gasto'} content={'Total Gasto'} width={100} />
+            {consumoListEdit && (
+              <View style={consumoStyle.seeCard}>
+                <Card label={'Data'} content={consumoListEdit?.date.toString()} width={200} />
+                <Card label={'Maior consumo'} content={'Maior consumo'} />
+                <Card label={'Menor consumo'} content={'Menor consumo'} />
+                <View style={consumoStyle.seeCardTotal}>
+                  <Card label={'Total kwh'} content={consumoListEdit.kwh.toString()} width={100} />
+                  <Card
+                    label={'Total Gasto'}
+                    content={consumoListEdit.dinheiro.toString()}
+                    width={100}
+                  />
+                </View>
               </View>
-            </View>
+            )}
           </View>
         </TouchableWithoutFeedback>
       )}
@@ -271,7 +278,7 @@ export const Home = () => {
                 dinheiro={item.dinheiro}
                 editFunc={() => editRegister(item.id !== undefined ? item.id : 0)}
                 deleteFunc={() => consumoListDeleteById(item.id !== undefined ? item.id : 0)}
-                seeConsume={openVisual}
+                seeConsume={() => openVisual(item.id !== undefined ? item.id : 0)}
               />
             ))}
         </ScrollView>
