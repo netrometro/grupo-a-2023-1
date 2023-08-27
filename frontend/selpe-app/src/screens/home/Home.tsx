@@ -22,6 +22,10 @@ import { useRoute } from '@react-navigation/native';
 import { styles } from '../register/style';
 import { Ionicons } from '@expo/vector-icons';
 import ModalTips from '../../components/modal/Modal';
+import { DeleteButton } from '../../components/deleteButton/DeleteButton';
+import { Feather } from '@expo/vector-icons';
+import { InfoListCard } from '../../components/infoListCard/InfoListCard';
+// import DateTimePicker from '@react-native-community/datetimepicker';
 
 export const Home = () => {
   const navigation = useNavigation<TabTypes>();
@@ -175,46 +179,93 @@ export const Home = () => {
 
   return (
     <SafeAreaView style={consumoStyle.container}>
-      <View style={consumoStyle.topBar}>
+      <View>
         <TopBar color="#FFEAA7"></TopBar>
         <ModalTips></ModalTips>
       </View>
       <StatusBar barStyle="dark-content" />
       <View>
-        <View>
-          <Text>Bem-vindo ao Selpe</Text>
-          <Text>Consuma sua energia de forma mais eficiente</Text>
+        <Text>Bem-vindo ao Selpe</Text>
+        <Text>Consuma sua energia de forma mais eficiente</Text>
+      </View>
+      <Text>Meus Consumos</Text>
+      <AddButton
+        name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
+        createFunc={openRegister}
+      ></AddButton>
+
+      <View style={{ alignItems: 'center' }}>
+        <View style={{ marginBottom: 38 }} />
+
+        <TopBar color="#FFEAA7" />
+
+        <View style={consumoStyle.modal}>
+          <Text style={consumoStyle.modalTitle}>Bem-vindo ao</Text>
+          <Text style={consumoStyle.modalTitle}>Selpe</Text>
+          <Text style={consumoStyle.modalBody}>Consuma sua energia de forma mais eficiente</Text>
         </View>
-        <Text>Meus Consumos</Text>
-        <AddButton
-          name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
-          createFunc={openRegister}
-        ></AddButton>
+
+        <View>
+          <Text style={consumoStyle.meusConsumos}>Meus Consumos</Text>
+        </View>
+
+        <View style={consumoStyle.buttons}>
+          {!registerOpen && (
+            <>
+              <AddButton
+                name={<Ionicons name="information-outline" size={24} color="#FFEAA7" />}
+                createFunc={() => {}}
+              />
+
+              <AddButton
+                name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
+                createFunc={openRegister}
+              />
+            </>
+          )}
+
+          <DeleteButton
+            name={
+              registerOpen === false ? (
+                <Feather name="trash" size={24} color="#FFEAA7" />
+              ) : (
+                <Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />
+              )
+            }
+            deleteFunc={registerOpen === false ? consumoListDelete : openRegister}
+          />
+        </View>
+
+        {/* <View style={consumoStyle.infoCard}>
+          <InfoListCard />
+        </View> */}
+
         {registerOpen && (
           <TouchableWithoutFeedback>
             <View style={consumoStyle.registerScreen}>
               <Text style={consumoStyle.registerTitle}>
                 {isEdit == false ? 'Adicionar' : 'Editar'}
               </Text>
+
               <TextInput
                 style={consumoStyle.registerInput}
-                placeholder="Data"
+                placeholder="Data: 2013-02-14T13:15:03-08:00"
                 onChangeText={(e) => handleChangeDate(e)}
-                value={String(date)}
+                // value={String(date)}
               />
 
               <TextInput
                 style={consumoStyle.registerInput}
-                placeholder="Dinheiro"
+                placeholder="Dinheiro: 245.00"
                 onChangeText={(e) => handleChangeDinheiro(e)}
-                value={dinheiro.toString()}
+                // value={dinheiro.toString()}
               />
 
               <TextInput
                 style={consumoStyle.registerInput}
-                placeholder="Kwh"
+                placeholder="Kwh: 128"
                 onChangeText={(e) => handleChangeKwh(e)}
-                value={kwh.toString()}
+                // value={kwh.toString()}
               />
 
               <TouchableOpacity

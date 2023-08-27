@@ -53,4 +53,6 @@ model Dicas {
   id          Int    @id @default(autoincrement())
   title       String
   description String
+  reference   String
+  reported    Boolean @default(false)
 }
