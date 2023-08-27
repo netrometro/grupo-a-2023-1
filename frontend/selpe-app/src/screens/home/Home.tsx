@@ -39,6 +39,31 @@ export const Home = () => {
 
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [isId, setIsId] = useState<number>(0);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const randomNumber = (min: number, max: number) => {
+    const ramdom = Math.random();
+
+    const number = Math.floor(min + ramdom * (max - min));
+    console.log('this:' + number);
+    return number;
+  };
+
+  const tipId = randomNumber(1, 10);
+
+  const getTips = async () => {
+    const tip = await api.get(`/api/dicas/${tipId}`);
+    if (tip) {
+      console.log(tip);
+      setTitle(tip.data.title);
+      setDescription(tip.data.description);
+    }
+  };
+
+  useEffect(() => {
+    getTips();
+  }, []);
 
   useEffect(() => {
     consumoListRequest(userId);
@@ -178,122 +203,105 @@ export const Home = () => {
   };
 
   return (
-    <SafeAreaView style={consumoStyle.container}>
-      <View>
-        <TopBar color="#FFEAA7"></TopBar>
-        <ModalTips></ModalTips>
-      </View>
-      <StatusBar barStyle="dark-content" />
-      <View>
-        <Text>Bem-vindo ao Selpe</Text>
-        <Text>Consuma sua energia de forma mais eficiente</Text>
-      </View>
-      <Text>Meus Consumos</Text>
-      <AddButton
-        name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
-        createFunc={openRegister}
-      ></AddButton>
-
-      <View style={{ alignItems: 'center' }}>
-        <View style={{ marginBottom: 38 }} />
-
+    <View style={consumoStyle.container}>
+      <View style={consumoStyle.topBar}>
         <TopBar color="#FFEAA7" />
+        <ModalTips title={title} description={description} id={tipId}></ModalTips>
+      </View>
+      <View style={consumoStyle.modal}>
+        <Text style={consumoStyle.modalTitle}>Bem-vindo ao</Text>
+        <Text style={consumoStyle.modalTitle}>Selpe</Text>
+        <Text style={consumoStyle.modalBody}>Consuma sua energia de forma mais eficiente</Text>
+      </View>
 
-        <View style={consumoStyle.modal}>
-          <Text style={consumoStyle.modalTitle}>Bem-vindo ao</Text>
-          <Text style={consumoStyle.modalTitle}>Selpe</Text>
-          <Text style={consumoStyle.modalBody}>Consuma sua energia de forma mais eficiente</Text>
-        </View>
+      <View>
+        <Text style={consumoStyle.meusConsumos}>Meus Consumos</Text>
+      </View>
 
-        <View>
-          <Text style={consumoStyle.meusConsumos}>Meus Consumos</Text>
-        </View>
+      <View style={consumoStyle.buttons}>
+        {!registerOpen && (
+          <>
+            <AddButton
+              name={<Ionicons name="information-outline" size={24} color="#FFEAA7" />}
+              createFunc={() => {}}
+            />
 
-        <View style={consumoStyle.buttons}>
-          {!registerOpen && (
-            <>
-              <AddButton
-                name={<Ionicons name="information-outline" size={24} color="#FFEAA7" />}
-                createFunc={() => {}}
-              />
+            <AddButton
+              name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
+              createFunc={openRegister}
+            />
+          </>
+        )}
 
-              <AddButton
-                name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
-                createFunc={openRegister}
-              />
-            </>
-          )}
+        <DeleteButton
+          name={
+            registerOpen === false ? (
+              <Feather name="trash" size={24} color="#FFEAA7" />
+            ) : (
+              <Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />
+            )
+          }
+          deleteFunc={registerOpen === false ? consumoListDelete : openRegister}
+        />
+      </View>
 
-          <DeleteButton
-            name={
-              registerOpen === false ? (
-                <Feather name="trash" size={24} color="#FFEAA7" />
-              ) : (
-                <Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />
-              )
-            }
-            deleteFunc={registerOpen === false ? consumoListDelete : openRegister}
-          />
-        </View>
-
-        {/* <View style={consumoStyle.infoCard}>
+      {/* <View style={consumoStyle.infoCard}>
           <InfoListCard />
         </View> */}
 
-        {registerOpen && (
-          <TouchableWithoutFeedback>
-            <View style={consumoStyle.registerScreen}>
-              <Text style={consumoStyle.registerTitle}>
-                {isEdit == false ? 'Adicionar' : 'Editar'}
+      {registerOpen && (
+        <TouchableWithoutFeedback>
+          <View style={consumoStyle.registerScreen}>
+            <Text style={consumoStyle.registerTitle}>
+              {isEdit == false ? 'Adicionar' : 'Editar'}
+            </Text>
+
+            <TextInput
+              style={consumoStyle.registerInput}
+              placeholder="Data: 2013-02-14T13:15:03-08:00"
+              onChangeText={(e) => handleChangeDate(e)}
+              // value={String(date)}
+            />
+
+            <TextInput
+              style={consumoStyle.registerInput}
+              placeholder="Dinheiro: 245.00"
+              onChangeText={(e) => handleChangeDinheiro(e)}
+              // value={dinheiro.toString()}
+            />
+
+            <TextInput
+              style={consumoStyle.registerInput}
+              placeholder="Kwh: 128"
+              onChangeText={(e) => handleChangeKwh(e)}
+              // value={kwh.toString()}
+            />
+
+            <TouchableOpacity
+              style={consumoStyle.registerButton}
+              onPress={isEdit === false ? consumoListCreate : () => consumoListPut(isId)}
+            >
+              <Text style={consumoStyle.registerButtonText}>
+                {isEdit == false ? 'Cadastrar' : 'Editar'}
               </Text>
-
-              <TextInput
-                style={consumoStyle.registerInput}
-                placeholder="Data: 2013-02-14T13:15:03-08:00"
-                onChangeText={(e) => handleChangeDate(e)}
-                // value={String(date)}
+            </TouchableOpacity>
+          </View>
+        </TouchableWithoutFeedback>
+      )}
+      <View style={consumoStyle.list}>
+        <ScrollView>
+          {consumoList &&
+            consumoList.map((item) => (
+              <ConsumoList
+                date={item.date}
+                kwh={item.kwh}
+                dinheiro={item.dinheiro}
+                editFunc={() => editRegister(item.id !== undefined ? item.id : 0)}
+                deleteFunc={() => consumoListDeleteById(item.id !== undefined ? item.id : 0)}
               />
-
-              <TextInput
-                style={consumoStyle.registerInput}
-                placeholder="Dinheiro: 245.00"
-                onChangeText={(e) => handleChangeDinheiro(e)}
-                // value={dinheiro.toString()}
-              />
-
-              <TextInput
-                style={consumoStyle.registerInput}
-                placeholder="Kwh: 128"
-                onChangeText={(e) => handleChangeKwh(e)}
-                // value={kwh.toString()}
-              />
-
-              <TouchableOpacity
-                style={consumoStyle.registerButton}
-                onPress={isEdit === false ? consumoListCreate : () => consumoListPut(isId)}
-              >
-                <Text style={consumoStyle.registerButtonText}>
-                  {isEdit == false ? 'Cadastrar' : 'Editar'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-        <View style={consumoStyle.list}>
-          <ScrollView>
-            {consumoList &&
-              consumoList.map((item) => (
-                <ConsumoList
-                  date={item.date}
-                  kwh={item.kwh}
-                  dinheiro={item.dinheiro}
-                  editFunc={() => editRegister(item.id !== undefined ? item.id : 0)}
-                  deleteFunc={() => consumoListDeleteById(item.id !== undefined ? item.id : 0)}
-                />
-              ))}
-          </ScrollView>
-        </View>
+            ))}
+        </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };

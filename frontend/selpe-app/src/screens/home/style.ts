@@ -9,6 +9,19 @@ export const consumoStyle = StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15
   },
+  icon: {
+    backgroundColor: 'black'
+  },
+  topBar: {
+    width: '100%',
+    marginTop: 15,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingRight: 15,
+    paddingLeft: 15
+  },
   titleDiv: {
     flex: 1,
     alignContent: 'center',
