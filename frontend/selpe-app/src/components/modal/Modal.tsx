@@ -1,12 +1,12 @@
 import { Text, View, Modal, TouchableOpacity } from 'react-native';
-
 import { useState } from 'react';
 import { styles } from './style';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
+import OptionModal from './options/OptionModal';
 
-export default function ModalTips() {
-  const [visible, setVisible] = useState(false);
+export default function ModalTips({ title, description, id }: modalProps) {
+  const [visible, setVisible] = useState<boolean>(false);
 
   return (
     <View>
@@ -18,10 +18,11 @@ export default function ModalTips() {
           setVisible(false);
         }}
       >
-        <BlurView intensity={0.1}>
+        <BlurView intensity={0.1} style={{ flex: 1, justifyContent: 'center' }}>
           <View style={styles.container}>
             <View style={styles.title}>
-              <Text style={styles.textTitle}>Dicas</Text>
+              <Text style={styles.textTitle}>{title}</Text>
+              <OptionModal id={id}></OptionModal>
               <TouchableOpacity
                 onPress={() => {
                   setVisible(false);
@@ -31,12 +32,13 @@ export default function ModalTips() {
               </TouchableOpacity>
             </View>
             <View style={styles.textContainer}>
-              <Text style={styles.text}>Testando as dicas</Text>
+              <Text style={styles.text}>{description}</Text>
             </View>
           </View>
         </BlurView>
       </Modal>
       <TouchableOpacity
+        style={{}}
         onPress={() => {
           setVisible(true);
         }}
