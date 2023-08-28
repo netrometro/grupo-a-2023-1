@@ -15,7 +15,7 @@ export const cardStyle = StyleSheet.create({
     backgroundColor: '#2980B9',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     padding: 12,
     borderRadius: 12,
     marginTop: 14,

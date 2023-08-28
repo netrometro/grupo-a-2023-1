@@ -4,16 +4,20 @@ import { cardStyle } from './Style';
 
 interface CardInterface {
   label: string;
-  content?: string;
+  cash?: string;
+  name?: string;
+  kwh?: string;
   width?: number;
 }
 
-export const Card = ({ label, content, width }: CardInterface) => {
+export const Card = ({ label, name, cash, kwh, width }: CardInterface) => {
   return (
     <View style={cardStyle.container}>
       <Text style={cardStyle.label}>{label}</Text>
       <View style={[cardStyle.contentView, { width: width }]}>
-        <Text style={cardStyle.content}>{content}</Text>
+        <Text style={cardStyle.content}>{name}</Text>
+        <Text style={cardStyle.content}>{cash}</Text>
+        <Text style={cardStyle.content}>{kwh}</Text>
       </View>
     </View>
   );

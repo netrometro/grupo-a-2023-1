@@ -251,24 +251,36 @@ export const Home = () => {
             <Text style={consumoStyle.registerTitle}>Consumo - xx</Text>
             {consumoListEdit && (
               <View style={consumoStyle.seeCard}>
-                <Card label={'Data'} content={consumoListEdit?.date.toString()} width={200} />
+                <Card label={'Data'} name={consumoListEdit?.date.toString()} width={200} />
                 <Card
                   label={'Maior consumo'}
-                  content={consumoListEdit.consumos
-                    ?.reduce((max, consumo) => Math.max(max, consumo.dinheiro), 0)
+                  name={consumoListEdit.consumos
+                    ?.reduce((max, consumo) => Math.max(max, consumo.eletroId), 0)
                     .toString()}
+                  kwh={`${consumoListEdit.consumos
+                    ?.reduce((max, consumo) => Math.max(max, consumo.kwh), 0)
+                    .toString()} kwh`}
+                  cash={`R$ ${consumoListEdit.consumos
+                    ?.reduce((max, consumo) => Math.max(max, consumo.dinheiro), 0)
+                    .toString()}`}
                 />
                 <Card
                   label={'Menor consumo'}
-                  content={consumoListEdit.consumos
-                    ?.reduce((min, consumo) => Math.min(min, consumo.dinheiro), Infinity)
+                  name={consumoListEdit.consumos
+                    ?.reduce((min, consumo) => Math.min(min, consumo.eletroId), Infinity)
                     .toString()}
+                  kwh={`${consumoListEdit.consumos
+                    ?.reduce((min, consumo) => Math.min(min, consumo.kwh), Infinity)
+                    .toString()} kwh`}
+                  cash={`R$ ${consumoListEdit.consumos
+                    ?.reduce((min, consumo) => Math.min(min, consumo.dinheiro), Infinity)
+                    .toString()}`}
                 />
                 <View style={consumoStyle.seeCardTotal}>
-                  <Card label={'Total kwh'} content={consumoListEdit.kwh.toString()} width={100} />
+                  <Card label={'Total kwh'} name={consumoListEdit.kwh.toString()} width={100} />
                   <Card
                     label={'Total Gasto'}
-                    content={consumoListEdit.dinheiro.toString()}
+                    name={consumoListEdit.dinheiro.toString()}
                     width={100}
                   />
                 </View>
