@@ -20,8 +20,8 @@ import { useRoute } from '@react-navigation/native';
 
 import { Ionicons } from '@expo/vector-icons';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
-import { Feather } from '@expo/vector-icons';
 import { Card } from '../../components/card/Card';
+import moment from 'moment';
 
 // import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -248,10 +248,17 @@ export const Home = () => {
       {seeOpen && (
         <TouchableWithoutFeedback>
           <View style={consumoStyle.registerScreen}>
-            <Text style={consumoStyle.registerTitle}>Consumo - xx</Text>
+            {consumoListEdit && (
+              <Text style={consumoStyle.registerTitle}>Consumo - {consumoListEdit.id}</Text>
+            )}
+
             {consumoListEdit && (
               <View style={consumoStyle.seeCard}>
-                <Card label={'Data'} name={consumoListEdit?.date.toString()} width={200} />
+                <Card
+                  label={'Data'}
+                  name={moment(consumoListEdit?.date.toString()).format('DD/MM/YYYY')}
+                  width={100}
+                />
                 <Card
                   label={'Maior consumo'}
                   name={consumoListEdit.consumos
