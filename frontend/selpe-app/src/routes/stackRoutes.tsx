@@ -27,3 +27,9 @@ export default function StackRoutes() {
     </Navigator>
   );
 }
+
+{
+  /* <Screen name="Register" component={RegisterPage}></Screen>
+<Screen name="Login" component={LoginPage}></Screen>
+<Screen name="Profile" component={ProfilePage} initialParams={{ id: 0 }}></Screen> */
+}

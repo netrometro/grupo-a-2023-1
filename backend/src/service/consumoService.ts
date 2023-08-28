@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { consumoDTO } from "../dto/consumoDTO";
 import prisma from "../prisma/prisma";
+import { date } from "zod";
 
 export async function createConsumo(input: Prisma.ConsumoUncheckedCreateInput) {
   const consumo = await prisma.consumo.create({
@@ -19,6 +20,7 @@ export async function listConsumos() {
 export async function listConsumo(input: Number) {
   const consumo = await prisma.consumo.findUnique({
     where: { id: Number(input) },
+    include: { consumos: true },
   });
 
   if (!consumo) {
@@ -70,4 +72,19 @@ export async function deleteConsumo(input: Number) {
   });
 
   return deleteConsumo;
+}
+
+// regra de negocio jamu
+
+export async function listHighConsumos(cash: string) {
+  const consumos = await prisma.consumo.findMany({
+    include: { consumos: true },
+    where: {
+      dinheiro: {
+        gte: parseInt(cash),
+      },
+    },
+  });
+
+  return consumos;
 }

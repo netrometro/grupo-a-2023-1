@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native';
 export const infoStyle = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: '#fad390',
+    backgroundColor: '#FFEAA7',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     padding: 12,
     borderRadius: 50,
     marginTop: 14,
@@ -15,14 +15,8 @@ export const infoStyle = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3
   },
-  iconsView: {
-    flexDirection: 'row',
-    gap: 10,
-    alignContent: 'center',
-    justifyContent: 'center'
-  },
   text: {
-    color: '#000',
+    color: '#2980B9',
     fontWeight: '500'
   }
 });

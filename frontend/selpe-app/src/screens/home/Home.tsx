@@ -1,9 +1,7 @@
 import {
   View,
   Text,
-  Button,
   ScrollView,
-  Keyboard,
   TouchableOpacity,
   TextInput,
   TouchableWithoutFeedback,
@@ -19,18 +17,20 @@ import { ConsumoList } from '../../components/consumolist/ConsumoList';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { consumoStyle } from './style';
 import { useRoute } from '@react-navigation/native';
-import { styles } from '../register/style';
+
 import { Ionicons } from '@expo/vector-icons';
 import ModalTips from '../../components/modal/Modal';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
-import { Feather } from '@expo/vector-icons';
-import { InfoListCard } from '../../components/infoListCard/InfoListCard';
+import { Card } from '../../components/card/Card';
+import moment from 'moment';
+
 // import DateTimePicker from '@react-native-community/datetimepicker';
 
 export const Home = () => {
   const navigation = useNavigation<TabTypes>();
   const [consumoList, setConsumoList] = useState<Array<ConsumoListInterface>>([]);
   const [registerOpen, setRegisterOpen] = useState<boolean>(false);
+  const [seeOpen, setSeeOpen] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [date, setDate] = useState<Date>(new Date('2013-02-14T13:15:03-08:00'));
   const [kwh, setKwh] = useState<number>(0);
@@ -174,20 +174,6 @@ export const Home = () => {
       });
   };
 
-  const consumoListDelete = async () => {
-    await api
-      .delete('api/consumo')
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        reloadPag();
-        console.log('deletou');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
   const consumoListDeleteById = async (id: number) => {
     await api
       .delete(`api/consumo/${id}`)
@@ -202,55 +188,57 @@ export const Home = () => {
       });
   };
 
-  return (
-    <View style={consumoStyle.container}>
-      <View style={consumoStyle.topBar}>
-        <TopBar color="#FFEAA7" />
-        <ModalTips title={title} description={description} id={tipId}></ModalTips>
-      </View>
-      <View style={consumoStyle.modal}>
-        <Text style={consumoStyle.modalTitle}>Bem-vindo ao</Text>
-        <Text style={consumoStyle.modalTitle}>Selpe</Text>
-        <Text style={consumoStyle.modalBody}>Consuma sua energia de forma mais eficiente</Text>
-      </View>
+  function openVisual(id: number) {
+    setSeeOpen(!seeOpen);
+    consumoListRequestById(id);
+  }
 
-      <View>
-        <Text style={consumoStyle.meusConsumos}>Meus Consumos</Text>
+  return (
+    <SafeAreaView style={consumoStyle.container}>
+      <View style={consumoStyle.topBar}>
+        {!registerOpen && !seeOpen && (
+          <>
+            <TopBar color="#FFEAA7" />
+            <ModalTips title={title} description={description} id={tipId}></ModalTips>
+          </>
+        )}
+      </View>
+      <StatusBar barStyle="dark-content" />
+      <View style={consumoStyle.titleDiv}>
+        <View style={consumoStyle.modal}>
+          <Text style={consumoStyle.modalTitle}>Bem-vindo ao</Text>
+          <Text style={consumoStyle.modalTitle}>Selpe</Text>
+          <Text style={consumoStyle.modalBody}>Consuma sua energia de forma mais eficiente</Text>
+        </View>
+
+        <View>
+          <Text style={consumoStyle.meusConsumos}>Meus Consumos</Text>
+        </View>
       </View>
 
       <View style={consumoStyle.buttons}>
-        {!registerOpen && (
-          <>
-            <AddButton
-              name={<Ionicons name="information-outline" size={24} color="#FFEAA7" />}
-              createFunc={() => {}}
-            />
-
-            <AddButton
-              name={<Ionicons name="md-add-outline" size={28} color="#FFEAA7" />}
-              createFunc={openRegister}
-            />
-          </>
+        {!registerOpen && !seeOpen && (
+          <AddButton
+            name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
+            createFunc={openRegister}
+            background={'#FFEAA7'}
+          />
         )}
-
-        <DeleteButton
-          name={
-            registerOpen === false ? (
-              <Feather name="trash" size={24} color="#FFEAA7" />
-            ) : (
-              <Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />
-            )
-          }
-          deleteFunc={registerOpen === false ? consumoListDelete : openRegister}
-        />
+        {registerOpen && (
+          <DeleteButton
+            name={<Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />}
+            deleteFunc={openRegister}
+          />
+        )}
+        {seeOpen && (
+          <DeleteButton
+            name={<Ionicons name="arrow-back-circle-outline" size={32} color="#FFEAA7" />}
+            deleteFunc={() => setSeeOpen(!seeOpen)}
+          />
+        )}
       </View>
-
-      {/* <View style={consumoStyle.infoCard}>
-          <InfoListCard />
-        </View> */}
-
       {registerOpen && (
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback style={consumoStyle.modals}>
           <View style={consumoStyle.registerScreen}>
             <Text style={consumoStyle.registerTitle}>
               {isEdit == false ? 'Adicionar' : 'Editar'}
@@ -288,6 +276,59 @@ export const Home = () => {
           </View>
         </TouchableWithoutFeedback>
       )}
+
+      {seeOpen && (
+        <TouchableWithoutFeedback style={consumoStyle.modals}>
+          <View style={consumoStyle.registerScreen}>
+            {consumoListEdit && (
+              <Text style={consumoStyle.registerTitle}>Consumo - {consumoListEdit.id}</Text>
+            )}
+
+            {consumoListEdit && (
+              <View style={consumoStyle.seeCard}>
+                <Card
+                  label={'Data'}
+                  name={moment(consumoListEdit?.date.toString()).format('DD/MM/YYYY')}
+                  width={100}
+                />
+                <Card
+                  label={'Maior consumo'}
+                  name={consumoListEdit.consumos
+                    ?.reduce((max, consumo) => Math.max(max, consumo.eletroId), 0)
+                    .toString()}
+                  kwh={`${consumoListEdit.consumos
+                    ?.reduce((max, consumo) => Math.max(max, consumo.kwh), 0)
+                    .toString()} kwh`}
+                  cash={`R$ ${consumoListEdit.consumos
+                    ?.reduce((max, consumo) => Math.max(max, consumo.dinheiro), 0)
+                    .toString()}`}
+                />
+                <Card
+                  label={'Menor consumo'}
+                  name={consumoListEdit.consumos
+                    ?.reduce((min, consumo) => Math.min(min, consumo.eletroId), Infinity)
+                    .toString()}
+                  kwh={`${consumoListEdit.consumos
+                    ?.reduce((min, consumo) => Math.min(min, consumo.kwh), Infinity)
+                    .toString()} kwh`}
+                  cash={`R$ ${consumoListEdit.consumos
+                    ?.reduce((min, consumo) => Math.min(min, consumo.dinheiro), Infinity)
+                    .toString()}`}
+                />
+                <View style={consumoStyle.seeCardTotal}>
+                  <Card label={'Total kwh'} name={consumoListEdit.kwh.toString()} width={100} />
+                  <Card
+                    label={'Total Gasto'}
+                    name={consumoListEdit.dinheiro.toString()}
+                    width={100}
+                  />
+                </View>
+              </View>
+            )}
+          </View>
+        </TouchableWithoutFeedback>
+      )}
+
       <View style={consumoStyle.list}>
         <ScrollView>
           {consumoList &&
@@ -298,10 +339,11 @@ export const Home = () => {
                 dinheiro={item.dinheiro}
                 editFunc={() => editRegister(item.id !== undefined ? item.id : 0)}
                 deleteFunc={() => consumoListDeleteById(item.id !== undefined ? item.id : 0)}
+                seeConsume={() => openVisual(item.id !== undefined ? item.id : 0)}
               />
             ))}
         </ScrollView>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

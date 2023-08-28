@@ -7,7 +7,8 @@ export const consumoStyle = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     paddingRight: 15,
-    paddingLeft: 15
+    paddingLeft: 15,
+    width: '100%'
   },
   icon: {
     backgroundColor: 'black'
@@ -23,18 +24,12 @@ export const consumoStyle = StyleSheet.create({
     paddingLeft: 15
   },
   titleDiv: {
-    flex: 1,
-    alignContent: 'center',
-    marginTop: 80
+    flex: 2,
+    flexDirection: 'column',
+    alignContent: 'center'
   },
-  principalTitle: {
-    color: '#FFEAA7',
-    fontSize: 30,
-    fontWeight: 'bold'
-  },
-
   buttons: {
-    flex: 1,
+    flex: 2,
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -54,6 +49,7 @@ export const consumoStyle = StyleSheet.create({
     backgroundColor: '#FFEAA7',
     width: '100%',
     height: '100%',
+    marginTop: 20,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
     alignItems: 'center',
@@ -132,5 +128,23 @@ export const consumoStyle = StyleSheet.create({
     fontSize: 24,
     fontStyle: 'normal',
     fontWeight: '600'
+  },
+
+  seeCard: {
+    marginTop: 30,
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 10
+  },
+
+  seeCardTotal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+
+  modals: {
+    flex: 0.5,
+    width: '100%'
   }
 });
