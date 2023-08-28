@@ -46,6 +46,8 @@ CREATE TABLE "Dicas" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "reference" TEXT NOT NULL,
+    "reported" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Dicas_pkey" PRIMARY KEY ("id")
 );

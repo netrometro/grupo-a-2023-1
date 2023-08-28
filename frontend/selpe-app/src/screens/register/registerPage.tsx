@@ -4,7 +4,8 @@ import {
   TouchableOpacity,
   TextInput,
   TextInputChangeEventData,
-  NativeSyntheticEvent
+  NativeSyntheticEvent,
+  SafeAreaView
 } from 'react-native';
 import TopBar from '../../components/top-bar/TopBar';
 import { styles } from './style';
@@ -44,10 +45,10 @@ export default function RegisterPage() {
   }
 
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <View style={styles.topBar}>
         <AntDesign name="close" size={22} color="#BDBDBD"></AntDesign>
-        <TopBar color="#2980B9"></TopBar>
+        <TopBar color="#FFEAA7"></TopBar>
         <TouchableOpacity onPress={loginScreen}>
           <Text style={styles.text}>Login</Text>
         </TouchableOpacity>
@@ -78,6 +79,6 @@ export default function RegisterPage() {
       <View style={styles.btn}>
         <Button label="Cadastrar" createfunction={handleSaveUser}></Button>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

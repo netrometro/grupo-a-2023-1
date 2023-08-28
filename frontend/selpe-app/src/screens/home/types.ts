@@ -3,5 +3,14 @@ interface ConsumoListInterface {
   userId: number;
   dinheiro: number;
   kwh: number;
-  date: Date
+  date: Date;
+  consumos?: Array<ConsumoInterface>;
+}
+
+interface ConsumoInterface {
+  id?: number;
+  consumoId: number;
+  eletroId: number;
+  dinheiro: number;
+  kwh: number;
 }

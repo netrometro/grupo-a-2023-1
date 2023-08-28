@@ -1,13 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#74B9FF',
+    flex: 1
+  },
   btn: {
     justifyContent: 'center',
     height: 250
   },
   text: {
     fontSize: 15,
-    color: '#2980B9',
+    color: '#FFEAA7',
     alignSelf: 'center',
     marginTop: 10,
     fontWeight: 'bold'

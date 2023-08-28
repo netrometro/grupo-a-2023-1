@@ -10,6 +10,6 @@ export const styles = StyleSheet.create({
   },
   text: {
     alignSelf: 'center',
-    color: '#FFFFFF'
+    color: '#FFEAA7'
   }
 });

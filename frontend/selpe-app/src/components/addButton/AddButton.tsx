@@ -5,11 +5,15 @@ import { addStyle } from './Style';
 interface ButtonInterface {
   name: React.ReactNode;
   createFunc(): void;
+  background: string;
 }
 
-export const AddButton = ({ name, createFunc }: ButtonInterface) => {
+export const AddButton = ({ name, createFunc, background }: ButtonInterface) => {
   return (
-    <TouchableOpacity style={addStyle.container} onPress={createFunc}>
+    <TouchableOpacity
+      style={[addStyle.container, { backgroundColor: background }]}
+      onPress={createFunc}
+    >
       {name}
     </TouchableOpacity>
   );

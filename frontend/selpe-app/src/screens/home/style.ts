@@ -2,25 +2,34 @@ import { StyleSheet } from 'react-native';
 
 export const consumoStyle = StyleSheet.create({
   container: {
-    backgroundColor: '#2980B9',
+    backgroundColor: '#74B9FF',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    gap: 10
+    paddingRight: 15,
+    paddingLeft: 15,
+    width: '100%'
+  },
+  icon: {
+    backgroundColor: 'black'
+  },
+  topBar: {
+    width: '100%',
+    marginTop: 15,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingRight: 15,
+    paddingLeft: 15
   },
   titleDiv: {
-    flex: 1,
-    alignContent: 'center',
-    marginTop: 80
+    flex: 2,
+    flexDirection: 'column',
+    alignContent: 'center'
   },
-  principalTitle: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold'
-  },
-
   buttons: {
-    flex: 1,
+    flex: 2,
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -37,9 +46,10 @@ export const consumoStyle = StyleSheet.create({
   },
 
   registerScreen: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFEAA7',
     width: '100%',
     height: '100%',
+    marginTop: 20,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
     alignItems: 'center',
@@ -69,12 +79,72 @@ export const consumoStyle = StyleSheet.create({
   },
 
   registerInput: {
-    backgroundColor: '#F6F6F6',
+    backgroundColor: '#2980B9',
     width: '90%',
     padding: 20,
     margin: 20,
-    color: '#000',
+    color: '#FFEAA7',
     borderRadius: 20
+  },
+
+  modal: {
+    // flex: 1,
+    margin: 38,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 298,
+    height: 145,
+    flexShrink: 0,
+    borderRadius: 28,
+    backgroundColor: '#FFEAA7',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+
+  modalTitle: {
+    color: '#2980B9',
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 30
+  },
+
+  modalBody: {
+    color: '#2980B9',
+    textAlign: 'center',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '600'
+  },
+
+  meusConsumos: {
+    color: '#FFEAA7',
+    marginBottom: 38,
+    textAlign: 'center',
+    fontSize: 24,
+    fontStyle: 'normal',
+    fontWeight: '600'
+  },
+
+  seeCard: {
+    marginTop: 30,
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 10
+  },
+
+  seeCardTotal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+
+  modals: {
+    flex: 0.5,
+    width: '100%'
   }
 });
-
