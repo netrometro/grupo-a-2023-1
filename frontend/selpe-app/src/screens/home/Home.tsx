@@ -105,7 +105,7 @@ export const Home = () => {
   function openRegister() {
     setIsEdit(false);
     setRegisterOpen(!registerOpen);
-    setDate(new Date('2013-02-14T13:15:03-08:00'));
+    setDate(new Date(Date.now()));
     setKwh(0);
     setDinheiro(0);
   }
