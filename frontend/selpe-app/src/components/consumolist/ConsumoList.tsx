@@ -30,7 +30,7 @@ export const ConsumoList = ({
       <Text style={listStyle.itemsText}>{kwh}</Text>
       <Text style={listStyle.itemsText}>{dinheiro}</Text>
       <View style={listStyle.iconsView}>
-        <Feather name="eye" size={24} color="black" onPress={seeConsume} />
+        <Feather name="eye" size={22} color="#FFEAA7" onPress={seeConsume} />
         <Feather name="x" size={28} color="#EB4D4B" onPress={deleteFunc} />
       </View>
     </View>
