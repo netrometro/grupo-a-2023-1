@@ -252,8 +252,18 @@ export const Home = () => {
             {consumoListEdit && (
               <View style={consumoStyle.seeCard}>
                 <Card label={'Data'} content={consumoListEdit?.date.toString()} width={200} />
-                <Card label={'Maior consumo'} content={'Maior consumo'} />
-                <Card label={'Menor consumo'} content={'Menor consumo'} />
+                <Card
+                  label={'Maior consumo'}
+                  content={consumoListEdit.consumos
+                    ?.reduce((max, consumo) => Math.max(max, consumo.dinheiro), 0)
+                    .toString()}
+                />
+                <Card
+                  label={'Menor consumo'}
+                  content={consumoListEdit.consumos
+                    ?.reduce((min, consumo) => Math.min(min, consumo.dinheiro), Infinity)
+                    .toString()}
+                />
                 <View style={consumoStyle.seeCardTotal}>
                   <Card label={'Total kwh'} content={consumoListEdit.kwh.toString()} width={100} />
                   <Card

@@ -4,7 +4,7 @@ import { cardStyle } from './Style';
 
 interface CardInterface {
   label: string;
-  content: string;
+  content?: string;
   width?: number;
 }
 
