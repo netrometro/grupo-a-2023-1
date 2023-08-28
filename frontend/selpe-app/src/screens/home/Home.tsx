@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { TabTypes } from '../../routes/tab';
+import { StackType } from '../../routes/stackRoutes';
 import TopBar from '../../components/top-bar/TopBar';
 import { AddButton } from '../../components/addButton/AddButton';
 import { api } from '../../services/Api';
@@ -24,10 +24,8 @@ import { DeleteButton } from '../../components/deleteButton/DeleteButton';
 import { Card } from '../../components/card/Card';
 import moment from 'moment';
 
-// import DateTimePicker from '@react-native-community/datetimepicker';
-
 export const Home = () => {
-  const navigation = useNavigation<TabTypes>();
+  const navigation = useNavigation<StackType>();
   const [consumoList, setConsumoList] = useState<Array<ConsumoListInterface>>([]);
   const [registerOpen, setRegisterOpen] = useState<boolean>(false);
   const [seeOpen, setSeeOpen] = useState<boolean>(false);
@@ -190,6 +188,10 @@ export const Home = () => {
     consumoListRequestById(id);
   }
 
+  function goToCalculator() {
+    navigation.navigate('Calculator');
+  }
+
   return (
     <SafeAreaView style={consumoStyle.container}>
       <View style={consumoStyle.topBar}>
@@ -215,11 +217,18 @@ export const Home = () => {
 
       <View style={consumoStyle.buttons}>
         {!registerOpen && !seeOpen && (
-          <AddButton
-            name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
-            createFunc={openRegister}
-            background={'#FFEAA7'}
-          />
+          <>
+            <AddButton
+              name={<Ionicons name="md-add-outline" size={28} color="#2980B9" />}
+              createFunc={openRegister}
+              background={'#FFEAA7'}
+            />
+            <AddButton
+              name={<Ionicons name="calculator" size={28} color="#2980B9" />}
+              createFunc={goToCalculator}
+              background={'#FFEAA7'}
+            />
+          </>
         )}
         {registerOpen && (
           <DeleteButton
