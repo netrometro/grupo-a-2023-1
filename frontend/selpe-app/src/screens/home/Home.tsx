@@ -69,9 +69,7 @@ export const Home = () => {
     consumoListRequest(userId);
     setDinheiro(consumoListEdit?.dinheiro != null ? consumoListEdit?.dinheiro : 0);
     setKwh(consumoListEdit?.kwh != null ? consumoListEdit?.kwh : 0);
-    setDate(
-      consumoListEdit?.date != null ? consumoListEdit?.date : new Date('2013-02-14T13:15:03-08:00')
-    );
+    setDate(consumoListEdit?.date != null ? consumoListEdit?.date : new Date());
   }, [reloadEffect]);
 
   const route = useRoute();
@@ -113,7 +111,6 @@ export const Home = () => {
   }
 
   function editRegister(id: number) {
-    // abre o form de editar o eletro
     setIsEdit(true);
     setRegisterOpen(!registerOpen);
     if (id !== undefined) {
@@ -127,7 +124,7 @@ export const Home = () => {
   }
 
   const handleChangeDate = (value: string) => {
-    setDate(new Date('2013-02-14T13:15:03-08:00'));
+    setDate(new Date(value));
   };
 
   const handleChangeKwh = (value: string) => {
@@ -142,7 +139,7 @@ export const Home = () => {
     userId: userId,
     dinheiro: dinheiro,
     kwh: kwh,
-    date: new Date('2013-02-14T13:15:03-08:00')
+    date: new Date(date)
   };
 
   const consumoListCreate = async () => {
@@ -246,23 +243,8 @@ export const Home = () => {
 
             <TextInput
               style={consumoStyle.registerInput}
-              placeholder="Data: 2013-02-14T13:15:03-08:00"
+              placeholder={`Data: ${new Date(Date.now())}`}
               onChangeText={(e) => handleChangeDate(e)}
-              // value={String(date)}
-            />
-
-            <TextInput
-              style={consumoStyle.registerInput}
-              placeholder="Dinheiro: 245.00"
-              onChangeText={(e) => handleChangeDinheiro(e)}
-              // value={dinheiro.toString()}
-            />
-
-            <TextInput
-              style={consumoStyle.registerInput}
-              placeholder="Kwh: 128"
-              onChangeText={(e) => handleChangeKwh(e)}
-              // value={kwh.toString()}
             />
 
             <TouchableOpacity
