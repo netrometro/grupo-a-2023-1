@@ -255,7 +255,7 @@ export const Home = () => {
               style={consumoStyle.registerInput}
               placeholder="Dinheiro: 245.00"
               onChangeText={(e) => handleChangeDinheiro(e)}
-              //// value={dinheiro.toString()}
+              // value={dinheiro.toString()}
             />
 
             <TextInput
