@@ -102,5 +102,39 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3
+  },
+
+  modal: {
+    // flex: 1,
+    margin: 38,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 298,
+    height: 145,
+    flexShrink: 0,
+    borderRadius: 28,
+    backgroundColor: '#FFEAA7',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+
+  modalTitle: {
+    color: '#2980B9',
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 30
+  },
+
+  modalBody: {
+    color: '#2980B9',
+    textAlign: 'center',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '600'
   }
 });

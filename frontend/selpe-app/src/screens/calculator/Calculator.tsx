@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { EletroListInterface } from '../eletro/types';
 import { EletroList } from '../../components/eletrolist/EletroList';
+import { InfoListCard } from '../../components/infoListCard/InfoListCard';
 
 export default function Calculator() {
   const route = useRoute();
@@ -89,7 +90,7 @@ export default function Calculator() {
   }
 
   function handleCalculateTotal() {
-    setTotalToPay(tarifa * numOfHours);
+    setTotalToPay(totalKWH * tarifa * numOfHours);
   }
 
   const totalKWH = eletroList.reduce((acc, cur) => {
@@ -103,16 +104,10 @@ export default function Calculator() {
       </View>
       <StatusBar barStyle="dark-content" />
 
-      <View>
-        <Text style={styles.principalTitle}>Tarifa em Pernambuco: {`R$${tarifa} por kWh`}</Text>
-      </View>
-
-      <View>
-        <Text style={styles.principalTitle}>Total de kWh: {`${totalKWH}`}</Text>
-      </View>
-
-      <View>
-        <Text style={styles.principalTitle}>Total a pagar: {`R$${totalToPay.toFixed(2)}`}</Text>
+      <View style={styles.modal}>
+        <Text style={styles.modalBody}>Tarifa em PE: {`R$${tarifa}/kWh`}</Text>
+        <Text style={styles.modalBody}>Total de kWh: {`${totalKWH}`}</Text>
+        <Text style={styles.modalBody}>Total a pagar:{`R$${totalToPay.toFixed(2)}`}</Text>
       </View>
 
       <TextInput
@@ -132,7 +127,7 @@ export default function Calculator() {
               <EletroList
                 name={item.nome}
                 kwh={item.kwh}
-                editFunc={() => editRegister(item.id !== undefined ? item.id : 0)}
+                editFunc={() => {}}
                 deleteFunc={() => {}}
               />
             ))}
