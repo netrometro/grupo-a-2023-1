@@ -89,8 +89,7 @@ export default function Calculator() {
   }
 
   function handleCalculateTotal() {
-    setTotalToPay(0);
-    setTotalToPay(totalToPay + tarifa * numOfHours * totalKWH);
+    setTotalToPay(tarifa * numOfHours);
   }
 
   const totalKWH = eletroList.reduce((acc, cur) => {
@@ -113,7 +112,7 @@ export default function Calculator() {
       </View>
 
       <View>
-        <Text style={styles.principalTitle}>Total a pagar: {`${totalToPay}`}</Text>
+        <Text style={styles.principalTitle}>Total a pagar: {`R$${totalToPay.toFixed(2)}`}</Text>
       </View>
 
       <TextInput
