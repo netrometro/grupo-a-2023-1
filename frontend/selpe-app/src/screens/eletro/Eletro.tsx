@@ -21,6 +21,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { InfoListCard } from '../../components/infoListCard/InfoListCard';
 import { api } from '../../services/Api';
 import { useRoute } from '@react-navigation/native';
+import { EletroListInterface } from './types';
 
 export function Eletro() {
   const route = useRoute();
