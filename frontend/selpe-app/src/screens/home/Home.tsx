@@ -44,7 +44,6 @@ export const Home = () => {
     const ramdom = Math.random();
 
     const number = Math.floor(min + ramdom * (max - min));
-    console.log('this:' + number);
     return number;
   };
 
@@ -53,7 +52,6 @@ export const Home = () => {
   const getTips = async () => {
     const tip = await api.get(`/api/dicas/${tipId}`);
     if (tip) {
-      console.log(tip);
       setTitle(tip.data.title);
       setDescription(tip.data.description);
     }
