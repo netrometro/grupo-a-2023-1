@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { TabTypes } from '../../routes/tab';
+import { StackType } from '../../routes/stackRoutes';
 import TopBar from '../../components/top-bar/TopBar';
 import { AddButton } from '../../components/addButton/AddButton';
 import { api } from '../../services/Api';
@@ -24,10 +24,8 @@ import { DeleteButton } from '../../components/deleteButton/DeleteButton';
 import { Card } from '../../components/card/Card';
 import moment from 'moment';
 
-// import DateTimePicker from '@react-native-community/datetimepicker';
-
 export const Home = () => {
-  const navigation = useNavigation<TabTypes>();
+  const navigation = useNavigation<StackType>();
   const [consumoList, setConsumoList] = useState<Array<ConsumoListInterface>>([]);
   const [registerOpen, setRegisterOpen] = useState<boolean>(false);
   const [seeOpen, setSeeOpen] = useState<boolean>(false);
@@ -46,7 +44,6 @@ export const Home = () => {
     const ramdom = Math.random();
 
     const number = Math.floor(min + ramdom * (max - min));
-    console.log('this:' + number);
     return number;
   };
 
@@ -55,7 +52,6 @@ export const Home = () => {
   const getTips = async () => {
     const tip = await api.get(`/api/dicas/${tipId}`);
     if (tip) {
-      console.log(tip);
       setTitle(tip.data.title);
       setDescription(tip.data.description);
     }
@@ -69,9 +65,7 @@ export const Home = () => {
     consumoListRequest(userId);
     setDinheiro(consumoListEdit?.dinheiro != null ? consumoListEdit?.dinheiro : 0);
     setKwh(consumoListEdit?.kwh != null ? consumoListEdit?.kwh : 0);
-    setDate(
-      consumoListEdit?.date != null ? consumoListEdit?.date : new Date('2013-02-14T13:15:03-08:00')
-    );
+    setDate(consumoListEdit?.date != null ? consumoListEdit?.date : new Date());
   }, [reloadEffect]);
 
   const route = useRoute();
@@ -107,13 +101,12 @@ export const Home = () => {
   function openRegister() {
     setIsEdit(false);
     setRegisterOpen(!registerOpen);
-    setDate(new Date('2013-02-14T13:15:03-08:00'));
+    setDate(new Date(Date.now()));
     setKwh(0);
     setDinheiro(0);
   }
 
   function editRegister(id: number) {
-    // abre o form de editar o eletro
     setIsEdit(true);
     setRegisterOpen(!registerOpen);
     if (id !== undefined) {
@@ -127,7 +120,7 @@ export const Home = () => {
   }
 
   const handleChangeDate = (value: string) => {
-    setDate(new Date('2013-02-14T13:15:03-08:00'));
+    setDate(new Date(value));
   };
 
   const handleChangeKwh = (value: string) => {
@@ -142,7 +135,7 @@ export const Home = () => {
     userId: userId,
     dinheiro: dinheiro,
     kwh: kwh,
-    date: new Date('2013-02-14T13:15:03-08:00')
+    date: new Date(date)
   };
 
   const consumoListCreate = async () => {
@@ -191,6 +184,10 @@ export const Home = () => {
   function openVisual(id: number) {
     setSeeOpen(!seeOpen);
     consumoListRequestById(id);
+  }
+
+  function goToCalculator() {
+    navigation.navigate('Calculator');
   }
 
   return (
@@ -246,23 +243,8 @@ export const Home = () => {
 
             <TextInput
               style={consumoStyle.registerInput}
-              placeholder="Data: 2013-02-14T13:15:03-08:00"
+              placeholder={`Data: ${new Date(Date.now())}`}
               onChangeText={(e) => handleChangeDate(e)}
-              // value={String(date)}
-            />
-
-            <TextInput
-              style={consumoStyle.registerInput}
-              placeholder="Dinheiro: 245.00"
-              onChangeText={(e) => handleChangeDinheiro(e)}
-              // value={dinheiro.toString()}
-            />
-
-            <TextInput
-              style={consumoStyle.registerInput}
-              placeholder="Kwh: 128"
-              onChangeText={(e) => handleChangeKwh(e)}
-              // value={kwh.toString()}
             />
 
             <TouchableOpacity

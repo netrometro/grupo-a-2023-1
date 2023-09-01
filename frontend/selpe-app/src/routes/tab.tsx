@@ -5,6 +5,7 @@ import { Eletro } from '../screens/eletro/Eletro';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ProfilePage from '../screens/profile/profilePage';
 import { useRoute } from '@react-navigation/core';
+import Calculator from '../screens/calculator/Calculator';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,6 +46,17 @@ export function TabComponent() {
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home-lightbulb-outline" color={color} size={size} />
+          )
+        }}
+        initialParams={{ id: id }}
+      />
+      <Tab.Screen
+        name="Calculator"
+        component={Calculator}
+        options={{
+          tabBarLabel: '',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="calculator" color={color} size={size} />
           )
         }}
         initialParams={{ id: id }}
