@@ -22,11 +22,12 @@ export type StackType = NativeStackNavigationProp<StackNavigation>;
 export default function StackRoutes() {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
-      <Screen name="Register" component={RegisterPage}></Screen>
-      <Screen name="Login" component={LoginPage}></Screen>
-      <Screen name="Profile" component={ProfilePage} initialParams={{ id: 0 }}></Screen>
       <Screen name="Tab" component={TabComponent} initialParams={{ id: 0 }}></Screen>
       <Screen name="Calculator" component={Calculator}></Screen>
     </Navigator>
   );
 }
+
+//<Screen name="Register" component={RegisterPage}></Screen>
+//<Screen name="Login" component={LoginPage}></Screen>
+//<Screen name="Profile" component={ProfilePage} initialParams={{ id: 0 }}></Screen>

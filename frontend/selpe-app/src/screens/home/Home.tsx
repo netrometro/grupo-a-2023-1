@@ -23,6 +23,7 @@ import ModalTips from '../../components/modal/Modal';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
 import { Card } from '../../components/card/Card';
 import moment from 'moment';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export const Home = () => {
   const navigation = useNavigation<StackType>();
@@ -304,6 +305,9 @@ export const Home = () => {
                     name={consumoListEdit.dinheiro.toString()}
                     width={100}
                   />
+                </View>
+                <View style={consumoStyle.whatsappView}>
+                  <FontAwesome5 name="whatsapp" size={36} color="black" />
                 </View>
               </View>
             )}
