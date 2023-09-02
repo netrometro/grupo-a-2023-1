@@ -23,7 +23,7 @@ import ModalTips from '../../components/modal/Modal';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
 import { Card } from '../../components/card/Card';
 import moment from 'moment';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export const Home = () => {
   const navigation = useNavigation<StackType>();
@@ -35,11 +35,14 @@ export const Home = () => {
   const [kwh, setKwh] = useState<number>(0);
   const [dinheiro, setDinheiro] = useState<number>(0);
   const [consumoListEdit, setConsumoListEdit] = useState<ConsumoListInterface>();
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [isId, setIsId] = useState<number>(0);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const randomNumber = (min: number, max: number) => {
     const ramdom = Math.random();
@@ -58,8 +61,17 @@ export const Home = () => {
     }
   };
 
+  const getInfo = async () => {
+    const user = await api.get(`/api/user/${userId}`);
+    if (user) {
+      setName(user.data.name);
+      setEmail(user.data.email);
+    }
+  };
+
   useEffect(() => {
     getTips();
+    getInfo();
   }, []);
 
   useEffect(() => {
@@ -182,6 +194,26 @@ export const Home = () => {
       });
   };
 
+  const emailData: EmailInterface = {
+    subject: 'Resumo do consumo do dia: ',
+    from: 'selpeappmobile@gmail.com',
+    to: 'jamueltonangelim@gmail.com',
+    html: '<h1>segundo teste</h1>'
+  };
+
+  const sendEmail = async () => {
+    await api
+      .post(`api/email`, emailData)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        console.log('email enviado');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   function openVisual(id: number) {
     setSeeOpen(!seeOpen);
     consumoListRequestById(id);
@@ -197,7 +229,12 @@ export const Home = () => {
         {!registerOpen && !seeOpen && (
           <>
             <TopBar color="#FFEAA7" />
-            <ModalTips title={title} description={description} id={tipId}></ModalTips>
+            <ModalTips
+              title={title}
+              description={description}
+              id={tipId}
+              icon={<Ionicons name="notifications-outline" size={26} color="#E17055" />}
+            ></ModalTips>
           </>
         )}
       </View>
@@ -306,8 +343,20 @@ export const Home = () => {
                     width={100}
                   />
                 </View>
-                <View style={consumoStyle.whatsappView}>
-                  <FontAwesome5 name="whatsapp" size={36} color="black" />
+                <View style={consumoStyle.mailView}>
+                  <ModalTips
+                    title={'Deseja mandar o email'}
+                    description={'Enviar consumo para email?'}
+                    id={0}
+                    icon={
+                      <MaterialIcons
+                        name="attach-email"
+                        size={36}
+                        color="#2980B9"
+                        //onPress={sendEmail}
+                      />
+                    }
+                  />
                 </View>
               </View>
             )}

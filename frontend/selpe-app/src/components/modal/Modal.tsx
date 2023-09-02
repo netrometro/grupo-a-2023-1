@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import OptionModal from './options/OptionModal';
 
-export default function ModalTips({ title, description, id }: modalProps) {
+export default function ModalTips({ title, description, id, icon }: modalProps) {
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
@@ -43,7 +43,7 @@ export default function ModalTips({ title, description, id }: modalProps) {
           setVisible(true);
         }}
       >
-        <Ionicons name="notifications-outline" size={26} color="#E17055" />
+        {icon}
       </TouchableOpacity>
     </View>
   );

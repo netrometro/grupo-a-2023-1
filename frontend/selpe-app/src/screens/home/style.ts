@@ -148,7 +148,7 @@ export const consumoStyle = StyleSheet.create({
     flex: 0.5,
     width: '100%'
   },
-  whatsappView: {
+  mailView: {
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',
