@@ -11,7 +11,7 @@ const transporter = nodeMailer.createTransport({
   secure: true,
   auth: {
     user: "selpeappmobile@gmail.com",
-    pass: "selpe12345",
+    pass: "duznguoecnlpcesd",
   },
 });
 

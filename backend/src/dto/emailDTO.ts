@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 const emailDTO = z.object({
-  text: z.string({
-    required_error: "text is required",
-    invalid_type_error: "text must be a string",
-  }),
+  //   text: z.string({
+  //     required_error: "text is required",
+  //     invalid_type_error: "text must be a string",
+  //   }),
   subject: z.string({
     required_error: "subject is required",
     invalid_type_error: "subject must be a string",

@@ -5,6 +5,7 @@ import consumoRoutes from "./routes/consumoRoutes";
 import eletroRoutes from "./routes/EletroRouts";
 import cors from "@fastify/cors";
 import tipsRoutes from "./routes/tipsRoutes";
+import emailRoutes from "./routes/emailRoutes";
 
 const server = Fastify();
 
@@ -19,6 +20,7 @@ async function main() {
   server.register(consumoEletroRoutes, { prefix: "api/consumosEletro" });
   server.register(consumoRoutes, { prefix: "api/consumo" });
   server.register(tipsRoutes, { prefix: "api/dicas" });
+  server.register(emailRoutes, { prefix: "api/email" });
 
   try {
     await server.listen({
