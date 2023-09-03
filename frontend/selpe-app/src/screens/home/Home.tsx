@@ -234,6 +234,7 @@ export const Home = () => {
               description={description}
               id={tipId}
               icon={<Ionicons name="notifications-outline" size={26} color="#E17055" />}
+              butElement={false}
             ></ModalTips>
           </>
         )}
@@ -348,14 +349,8 @@ export const Home = () => {
                     title={'Deseja mandar o email'}
                     description={'Enviar consumo para email?'}
                     id={0}
-                    icon={
-                      <MaterialIcons
-                        name="attach-email"
-                        size={36}
-                        color="#2980B9"
-                        //onPress={sendEmail}
-                      />
-                    }
+                    icon={<MaterialIcons name="attach-email" size={36} color="#2980B9" />}
+                    butElement={false}
                   />
                 </View>
               </View>

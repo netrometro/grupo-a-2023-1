@@ -7,6 +7,7 @@ import OptionModal from './options/OptionModal';
 
 export default function ModalTips({ title, description, id, icon }: modalProps) {
   const [visible, setVisible] = useState<boolean>(false);
+  const [buttonO, setButtonOn] = useState<boolean>(false);
 
   return (
     <View>
@@ -33,6 +34,17 @@ export default function ModalTips({ title, description, id, icon }: modalProps) 
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.text}>{description}</Text>
+            </View>
+            <View>
+              {!buttonO && (
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible(false);
+                  }}
+                >
+                  <Ionicons name="close" size={24} color="#FFEAA7" />
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </BlurView>
