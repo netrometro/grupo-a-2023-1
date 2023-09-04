@@ -42,7 +42,6 @@ export const Home = () => {
 
   const randomNumber = (min: number, max: number) => {
     const ramdom = Math.random();
-
     const number = Math.floor(min + ramdom * (max - min));
     return number;
   };
