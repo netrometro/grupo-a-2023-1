@@ -11,13 +11,25 @@ datasource db {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  name     String
-  email    String    @unique
-  password String
-  endereco String?
-  eletro   Eletro[]
-  Consumo  Consumo[]
+  id         Int       @id @default(autoincrement())
+  name       String
+  email      String    @unique
+  password   String
+  enderecoId Int?
+  eletro     Eletro[]
+  Consumo    Consumo[]
+  Endereco   Endereco? @relation(fields: [enderecoId], references: [id])
+}
+
+model Endereco {
+  id         Int    @id @default(autoincrement())
+  cep        String 
+  logradouro String
+  bairro     String
+  localidade String
+  uf         String
+  numero     Int
+  users      User[]
 }
 
 model Eletro {
@@ -40,17 +52,17 @@ model Consumo {
 }
 
 model ConsumoEletro {
-  id         Int      @id @default(autoincrement())
-  consumoId  Int
-  eletroId   Int
-  dinheiro   Int
-  kwh        Int
-  Consumo    Consumo @relation(fields: [consumoId], references: [id])
-  Eletro     Eletro  @relation(fields: [eletroId], references: [id])
+  id        Int     @id @default(autoincrement())
+  consumoId Int
+  eletroId  Int
+  dinheiro  Int
+  kwh       Int
+  Consumo   Consumo @relation(fields: [consumoId], references: [id])
+  Eletro    Eletro  @relation(fields: [eletroId], references: [id])
 }
 
 model Dicas {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   title       String
   description String
   reference   String
