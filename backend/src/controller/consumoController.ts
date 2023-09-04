@@ -5,6 +5,7 @@ import {
   listConsumos,
   updateConsumo,
   deleteConsumo,
+  listHighConsumos,
 } from "../service/consumoService";
 import { consumoDTO } from "../dto/consumoDTO";
 
@@ -20,7 +21,7 @@ export async function registerConsumo(
       kwh: body.kwh,
       userId: body.userId,
       consumos: {
-        create: body.consumos
+        create: body.consumos,
       },
       date: body.date,
     });
@@ -39,6 +40,19 @@ export async function findConsumo(
 
   try {
     const consumo = await listConsumo(id.id);
+    return reply.code(201).send(consumo);
+  } catch (e) {
+    return reply.send(e);
+  }
+}
+
+export async function findHighConsumo(
+  request: FastifyRequest,
+  reply: FastifyReply
+) {
+  const cash = Object(request.params);
+  try {
+    const consumo = await listHighConsumos(cash.cash);
     return reply.code(201).send(consumo);
   } catch (e) {
     return reply.send(e);

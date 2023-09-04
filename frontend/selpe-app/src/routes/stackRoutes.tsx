@@ -6,6 +6,7 @@ import RegisterPage from '../screens/register/registerPage';
 import LoginPage from '../screens/login/loginPage';
 import ProfilePage from '../screens/profile/profilePage';
 import { TabComponent } from './tab';
+import Calculator from '../screens/calculator/Calculator';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ type StackNavigation = {
   Login: undefined;
   Tab: { id: number } | undefined;
   Profile: { id: number } | undefined;
+  Calculator: undefined;
 };
 
 export type StackType = NativeStackNavigationProp<StackNavigation>;
@@ -24,6 +26,7 @@ export default function StackRoutes() {
       <Screen name="Login" component={LoginPage}></Screen>
       <Screen name="Profile" component={ProfilePage} initialParams={{ id: 0 }}></Screen>
       <Screen name="Tab" component={TabComponent} initialParams={{ id: 0 }}></Screen>
+      <Screen name="Calculator" component={Calculator}></Screen>
     </Navigator>
   );
 }
