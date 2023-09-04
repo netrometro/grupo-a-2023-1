@@ -5,6 +5,15 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#74B9FF'
   },
+  adressContainer: {
+    backgroundColor: '#FFEAA7',
+    width: '100%',
+    height: '100%',
+    borderTopRightRadius: 50,
+    borderTopLeftRadius: 50,
+    alignItems: 'center',
+    alignContent: 'center'
+  },
   topBar: {
     width: '100%',
     height: 100,
@@ -66,5 +75,43 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     padding: 15,
     borderRadius: 15
+  },
+  backBtn: {
+    padding: 15,
+    alignSelf: 'flex-end'
+  },
+  adressTitle: {
+    color: '#2980B9',
+    fontSize: 30,
+    marginTop: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center'
+  },
+  adressInput: {
+    backgroundColor: '#2980B9',
+    width: '90%',
+    padding: 10,
+    margin: 20,
+    color: '#FFEAA7',
+    borderRadius: 15
+  },
+  littleInput: {
+    backgroundColor: '#2980B9',
+    width: '40%',
+    color: '#FFEAA7',
+    margin: 18,
+    padding: 10,
+    borderRadius: 15
+  },
+  littleInputArea: {
+    flexDirection: 'row'
+  },
+  adressBtn: {
+    backgroundColor: '#E17055',
+    padding: 20,
+    marginTop: 35,
+    borderRadius: 50,
+    width: '90%',
+    alignItems: 'center'
   }
 });
