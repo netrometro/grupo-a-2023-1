@@ -15,7 +15,7 @@ const userDTO = z.object({
     required_error: "password is required",
     invalid_type_error: "password must be a string",
   }),
-  endereco: z.string({}),
+  endereco: z.number({ invalid_type_error: "endereço must be a number" }),
 });
 
 export type userDTO = z.infer<typeof userDTO>;

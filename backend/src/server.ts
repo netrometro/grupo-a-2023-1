@@ -3,6 +3,7 @@ import userRoutes from "./routes/userRoutes";
 import consumoEletroRoutes from "./routes/consumoEletroRoutes";
 import consumoRoutes from "./routes/consumoRoutes";
 import eletroRoutes from "./routes/EletroRouts";
+import enderecoRoutes from "./routes/enderecoRoutes";
 import cors from "@fastify/cors";
 import tipsRoutes from "./routes/tipsRoutes";
 
@@ -19,6 +20,7 @@ async function main() {
   server.register(consumoEletroRoutes, { prefix: "api/consumosEletro" });
   server.register(consumoRoutes, { prefix: "api/consumo" });
   server.register(tipsRoutes, { prefix: "api/dicas" });
+  server.register(enderecoRoutes, { prefix: "api/endereco" });
 
   try {
     await server.listen({
