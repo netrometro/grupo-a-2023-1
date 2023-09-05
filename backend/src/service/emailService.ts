@@ -5,15 +5,7 @@ const html = `
     <h1>Teste de envio de email</h1>
 `;
 
-const transporter = nodeMailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: "selpeappmobile@gmail.com",
-    pass: "duznguoecnlpcesd",
-  },
-});
+const transporter = nodeMailer.createTransport({});
 
 export async function sendEmail(emailData: emailDTO) {
   try {
