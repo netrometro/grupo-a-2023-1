@@ -37,12 +37,13 @@ export const Home = () => {
   const [consumoListEdit, setConsumoListEdit] = useState<ConsumoListInterface>();
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [isId, setIsId] = useState<number>(0);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const route = useRoute();
+  const userId = Object(route.params).id;
 
   const randomNumber = (min: number, max: number) => {
     const ramdom = Math.random();
@@ -81,15 +82,10 @@ export const Home = () => {
     setDate(consumoListEdit?.date != null ? consumoListEdit?.date : new Date());
   }, [reloadEffect]);
 
-  const route = useRoute();
-  const userId = Object(route.params).id;
-
   const consumoListRequest = async (id: number) => {
     await api
       .get(`api/consumo/consumos`)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
         setConsumoList(res.data);
       })
       .catch((error) => {
@@ -101,8 +97,6 @@ export const Home = () => {
     await api
       .get(`api/consumo/${id}`)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
         reloadPag();
         setConsumoListEdit(res.data);
       })
@@ -195,10 +189,20 @@ export const Home = () => {
   };
 
   const emailData: EmailInterface = {
-    subject: 'Resumo do consumo do dia: ',
+    subject: `Resumo do consumo do dia: ${moment(consumoListEdit?.date.toString()).format(
+      'DD/MM/YYYY'
+    )}`,
     from: 'selpeappmobile@gmail.com',
-    to: 'jamueltonangelim@gmail.com',
-    html: '<h1>segundo teste</h1>'
+    to: email,
+    html: `<h1>Consumo</h1> <h2>Olá ${name}, esse foi o seu consumo:</h2> <p>Gastou um total de ${consumoListEdit?.kwh.toString()} kwh </p> <p>Gastou um total de R$ ${consumoListEdit?.dinheiro.toString()}  </p> <p>Maior consumo: ${consumoListEdit?.consumos
+      ?.reduce((max, consumo) => Math.max(max, consumo.kwh), 0)
+      .toString()} kwh e R$ ${consumoListEdit?.consumos
+      ?.reduce((max, consumo) => Math.max(max, consumo.dinheiro), 0)
+      .toString()} </p>  <p>Menor consumo: ${consumoListEdit?.consumos
+      ?.reduce((min, consumo) => Math.min(min, consumo.kwh), Infinity)
+      .toString()} kwh e R$ ${consumoListEdit?.consumos
+      ?.reduce((min, consumo) => Math.min(min, consumo.dinheiro), Infinity)
+      .toString()} </p>`
   };
 
   const sendEmail = async () => {
@@ -350,7 +354,8 @@ export const Home = () => {
                     description={'Enviar consumo para email?'}
                     id={0}
                     icon={<MaterialIcons name="attach-email" size={36} color="#2980B9" />}
-                    butElement={false}
+                    butElement={true}
+                    butFunction={sendEmail}
                   />
                 </View>
               </View>

@@ -4,4 +4,5 @@ interface modalProps {
   id: number;
   icon: React.ReactNode;
   butElement: boolean;
+  butFunction?: () => void;
 }
