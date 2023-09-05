@@ -14,3 +14,10 @@ interface ConsumoInterface {
   dinheiro: number;
   kwh: number;
 }
+
+interface EmailInterface {
+  subject: string;
+  from: string;
+  to: string;
+  html: string;
+}

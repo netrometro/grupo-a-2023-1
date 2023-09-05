@@ -5,7 +5,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import OptionModal from './options/OptionModal';
 
-export default function ModalTips({ title, description, id }: modalProps) {
+export default function ModalTips({
+  title,
+  description,
+  id,
+  icon,
+  butFunction,
+  butElement,
+  optionalModal
+}: modalProps) {
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
@@ -22,7 +30,7 @@ export default function ModalTips({ title, description, id }: modalProps) {
           <View style={styles.container}>
             <View style={styles.title}>
               <Text style={styles.textTitle}>{title}</Text>
-              <OptionModal id={id}></OptionModal>
+              {!optionalModal && <OptionModal id={id}></OptionModal>}
               <TouchableOpacity
                 onPress={() => {
                   setVisible(false);
@@ -34,6 +42,13 @@ export default function ModalTips({ title, description, id }: modalProps) {
             <View style={styles.textContainer}>
               <Text style={styles.text}>{description}</Text>
             </View>
+            <View style={styles.buttonView}>
+              {butElement && (
+                <TouchableOpacity onPress={butFunction} style={styles.confirmButton}>
+                  <Text style={styles.buttonText}>Confirmar</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
         </BlurView>
       </Modal>
@@ -43,7 +58,7 @@ export default function ModalTips({ title, description, id }: modalProps) {
           setVisible(true);
         }}
       >
-        <Ionicons name="notifications-outline" size={26} color="#E17055" />
+        {icon}
       </TouchableOpacity>
     </View>
   );
