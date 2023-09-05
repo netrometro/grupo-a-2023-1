@@ -23,6 +23,7 @@ import ModalTips from '../../components/modal/Modal';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
 import { Card } from '../../components/card/Card';
 import moment from 'moment';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export const Home = () => {
   const navigation = useNavigation<StackType>();
@@ -34,11 +35,15 @@ export const Home = () => {
   const [kwh, setKwh] = useState<number>(0);
   const [dinheiro, setDinheiro] = useState<number>(0);
   const [consumoListEdit, setConsumoListEdit] = useState<ConsumoListInterface>();
-
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [reloadEffect, setReloadEffect] = useState<number>(0);
   const [isId, setIsId] = useState<number>(0);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+
+  const route = useRoute();
+  const userId = Object(route.params).id;
 
   const randomNumber = (min: number, max: number) => {
     const ramdom = Math.random();
@@ -56,8 +61,17 @@ export const Home = () => {
     }
   };
 
+  const getInfo = async () => {
+    const user = await api.get(`/api/user/${userId}`);
+    if (user) {
+      setName(user.data.name);
+      setEmail(user.data.email);
+    }
+  };
+
   useEffect(() => {
     getTips();
+    getInfo();
   }, []);
 
   useEffect(() => {
@@ -67,15 +81,10 @@ export const Home = () => {
     setDate(consumoListEdit?.date != null ? consumoListEdit?.date : new Date());
   }, [reloadEffect]);
 
-  const route = useRoute();
-  const userId = Object(route.params).id;
-
   const consumoListRequest = async (id: number) => {
     await api
       .get(`api/consumo/consumos`)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
         setConsumoList(res.data);
       })
       .catch((error) => {
@@ -87,8 +96,6 @@ export const Home = () => {
     await api
       .get(`api/consumo/${id}`)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
         reloadPag();
         setConsumoListEdit(res.data);
       })
@@ -180,6 +187,37 @@ export const Home = () => {
       });
   };
 
+  const emailData: EmailInterface = {
+    subject: `Resumo do consumo do dia: ${moment(consumoListEdit?.date.toString()).format(
+      'DD/MM/YYYY'
+    )}`,
+    from: 'selpeappmobile@gmail.com',
+    to: email,
+    html: `<h1>Consumo</h1> <h2>Olá ${name}, esse foi o seu consumo:</h2> <p>Gastou um total de ${consumoListEdit?.kwh.toString()} kwh </p> <p>Gastou um total de R$ ${consumoListEdit?.dinheiro.toString()}  </p> <p>Maior consumo: ${consumoListEdit?.consumos
+      ?.reduce((max, consumo) => Math.max(max, consumo.kwh), 0)
+      .toString()} kwh e R$ ${consumoListEdit?.consumos
+      ?.reduce((max, consumo) => Math.max(max, consumo.dinheiro), 0)
+      .toString()} </p>  <p>Menor consumo: ${consumoListEdit?.consumos
+      ?.reduce((min, consumo) => Math.min(min, consumo.kwh), Infinity)
+      .toString()} kwh e R$ ${consumoListEdit?.consumos
+      ?.reduce((min, consumo) => Math.min(min, consumo.dinheiro), Infinity)
+      .toString()} </p>`
+  };
+
+  const sendEmail = async () => {
+    await api
+      .post(`api/email`, emailData)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        console.log('email enviado');
+        alert('email enviado');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   function openVisual(id: number) {
     setSeeOpen(!seeOpen);
     consumoListRequestById(id);
@@ -195,7 +233,14 @@ export const Home = () => {
         {!registerOpen && !seeOpen && (
           <>
             <TopBar color="#FFEAA7" />
-            <ModalTips title={title} description={description} id={tipId}></ModalTips>
+            <ModalTips
+              title={title}
+              description={description}
+              id={tipId}
+              icon={<Ionicons name="notifications-outline" size={26} color="#E17055" />}
+              butElement={false}
+              optionalModal={false}
+            ></ModalTips>
           </>
         )}
       </View>
@@ -302,6 +347,17 @@ export const Home = () => {
                     label={'Total Gasto'}
                     name={consumoListEdit.dinheiro.toString()}
                     width={100}
+                  />
+                </View>
+                <View style={consumoStyle.mailView}>
+                  <ModalTips
+                    title={'Deseja mandar o email'}
+                    description={`Enviar consumo para email: ${email}?`}
+                    id={0}
+                    icon={<MaterialIcons name="attach-email" size={36} color="#2980B9" />}
+                    butElement={true}
+                    butFunction={sendEmail}
+                    optionalModal={true}
                   />
                 </View>
               </View>
