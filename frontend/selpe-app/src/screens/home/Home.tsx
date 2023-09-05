@@ -212,6 +212,7 @@ export const Home = () => {
         console.log(res);
         console.log(res.data);
         console.log('email enviado');
+        alert('email enviado');
       })
       .catch((error) => {
         console.error(error);
@@ -239,6 +240,7 @@ export const Home = () => {
               id={tipId}
               icon={<Ionicons name="notifications-outline" size={26} color="#E17055" />}
               butElement={false}
+              optionalModal={false}
             ></ModalTips>
           </>
         )}
@@ -351,11 +353,12 @@ export const Home = () => {
                 <View style={consumoStyle.mailView}>
                   <ModalTips
                     title={'Deseja mandar o email'}
-                    description={'Enviar consumo para email?'}
+                    description={`Enviar consumo para email: ${email}?`}
                     id={0}
                     icon={<MaterialIcons name="attach-email" size={36} color="#2980B9" />}
                     butElement={true}
                     butFunction={sendEmail}
+                    optionalModal={true}
                   />
                 </View>
               </View>

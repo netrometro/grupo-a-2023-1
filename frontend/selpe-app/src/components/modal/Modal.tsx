@@ -11,10 +11,10 @@ export default function ModalTips({
   id,
   icon,
   butFunction,
-  butElement
+  butElement,
+  optionalModal
 }: modalProps) {
   const [visible, setVisible] = useState<boolean>(false);
-  const [buttonO, setButtonOn] = useState<boolean>(false);
 
   return (
     <View>
@@ -30,7 +30,7 @@ export default function ModalTips({
           <View style={styles.container}>
             <View style={styles.title}>
               <Text style={styles.textTitle}>{title}</Text>
-              <OptionModal id={id}></OptionModal>
+              {!optionalModal && <OptionModal id={id}></OptionModal>}
               <TouchableOpacity
                 onPress={() => {
                   setVisible(false);
@@ -42,10 +42,10 @@ export default function ModalTips({
             <View style={styles.textContainer}>
               <Text style={styles.text}>{description}</Text>
             </View>
-            <View>
+            <View style={styles.buttonView}>
               {butElement && (
-                <TouchableOpacity onPress={butFunction}>
-                  <Text>Confirmar</Text>
+                <TouchableOpacity onPress={butFunction} style={styles.confirmButton}>
+                  <Text style={styles.buttonText}>Confirmar</Text>
                 </TouchableOpacity>
               )}
             </View>

@@ -5,4 +5,5 @@ interface modalProps {
   icon: React.ReactNode;
   butElement: boolean;
   butFunction?: () => void;
+  optionalModal: boolean;
 }
