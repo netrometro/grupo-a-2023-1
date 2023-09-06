@@ -91,7 +91,7 @@ export async function updateAdress(
   reply: FastifyReply
 ) {
   const userId = Object(request.params).id;
-  const enderecoId = Object(request.params).enderecoid;
+  const enderecoId = Object(request.params).endereco;
   try {
     const update = await addAdress(userId, enderecoId);
     return reply.code(201).send(update);
