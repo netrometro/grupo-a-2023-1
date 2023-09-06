@@ -9,7 +9,6 @@ export async function createUser(input: userDTO) {
 }
 
 export async function login(body: userDTO) {
-  console.log("entrei");
   const user = await prisma.user.findFirst({
     where: { email: body.email },
   });
@@ -90,7 +89,7 @@ export async function addAdress(id: number, endereco: number) {
   }
   await prisma.user.update({
     where: { id: userId },
-    data: { enderecoId: enderecoId },
+    data: { endereco: enderecoId },
   });
 }
 
@@ -101,7 +100,7 @@ export async function getUserAdress(id: number) {
   if (!user) {
     throw new Error("user not found");
   }
-  const adressId = user.enderecoId;
+  const adressId = user.endereco;
   const adress = await prisma.endereco.findFirst({
     where: { id: Number(adressId) },
   });
