@@ -140,11 +140,18 @@ export const consumoStyle = StyleSheet.create({
 
   seeCardTotal: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    alignContent: 'center'
   },
 
   modals: {
     flex: 0.5,
     width: '100%'
+  },
+  mailView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    margin: 30
   }
 });
