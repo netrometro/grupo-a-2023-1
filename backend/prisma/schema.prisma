@@ -15,10 +15,10 @@ model User {
   name       String
   email      String    @unique
   password   String
-  enderecoId Int?
+  endereco Int?
   eletro     Eletro[]
   Consumo    Consumo[]
-  Endereco   Endereco? @relation(fields: [enderecoId], references: [id])
+  Endereco   Endereco? @relation(fields: [endereco], references: [id])
 }
 
 model Endereco {

@@ -9,6 +9,7 @@ export async function createUser(input: userDTO) {
 }
 
 export async function login(body: userDTO) {
+  console.log("entrei");
   const user = await prisma.user.findFirst({
     where: { email: body.email },
   });
