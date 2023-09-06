@@ -4,9 +4,22 @@ CREATE TABLE "User" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "endereco" TEXT,
+    "enderecoId" INTEGER,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Endereco" (
+    "id" SERIAL NOT NULL,
+    "cep" TEXT NOT NULL,
+    "logradouro" TEXT NOT NULL,
+    "bairro" TEXT NOT NULL,
+    "localidade" TEXT NOT NULL,
+    "uf" TEXT NOT NULL,
+    "numero" INTEGER NOT NULL,
+
+    CONSTRAINT "Endereco_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -57,6 +70,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Eletro_nome_key" ON "Eletro"("nome");
+
+-- AddForeignKey
+ALTER TABLE "User" ADD CONSTRAINT "User_enderecoId_fkey" FOREIGN KEY ("enderecoId") REFERENCES "Endereco"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Eletro" ADD CONSTRAINT "Eletro_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
