@@ -18,7 +18,7 @@ async function userRoutes(server: FastifyInstance) {
   server.post("/", registerUser);
   server.post("/login", loginUser);
   server.post("/delete/:id", removeUser);
-  server.put("/endereco/:id/:enderecoid", updateAdress);
+  server.put("/endereco/:id/:endereco", updateAdress);
 }
 
 export default userRoutes;

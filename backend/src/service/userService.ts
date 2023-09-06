@@ -87,10 +87,17 @@ export async function addAdress(id: number, endereco: number) {
   if (!user) {
     throw new Error("user not found");
   }
-  await prisma.user.update({
-    where: { id: userId },
-    data: { endereco: enderecoId },
-  });
+  const newAdress = await prisma.user
+    .update({
+      where: { id: userId },
+      data: { endereco: enderecoId },
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 export async function getUserAdress(id: number) {
