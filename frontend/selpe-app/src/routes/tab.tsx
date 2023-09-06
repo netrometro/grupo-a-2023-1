@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import ProfilePage from '../screens/profile/profilePage';
 import { useRoute } from '@react-navigation/core';
 import Calculator from '../screens/calculator/Calculator';
+import Climate from '../screens/climate/Climate';
 
 const Tab = createBottomTabNavigator();
 
@@ -61,6 +62,18 @@ export function TabComponent() {
         }}
         initialParams={{ id: id }}
       />
+      <Tab.Screen
+        name="Climate"
+        component={Climate}
+        options={{
+          tabBarLabel: '',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="weather-lightning-rainy" color={color} size={size} />
+          )
+        }}
+        initialParams={{ id: id }}
+      />
+
       <Tab.Screen
         name="Profile"
         component={ProfilePage}
