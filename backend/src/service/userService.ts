@@ -94,6 +94,7 @@ export async function addAdress(id: number, endereco: number) {
 }
 
 export async function getUserAdress(id: number) {
+  console.log(prisma.user);
   const user = await prisma.user.findFirst({
     where: { id: Number(id) },
   });
