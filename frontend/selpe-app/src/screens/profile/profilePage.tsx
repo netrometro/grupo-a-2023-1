@@ -56,10 +56,6 @@ export default function ProfilePage() {
     getuserAdress();
   }, []);
 
-  // useEffect(() => {
-  //   getuserAdress();
-  // }, [userAdress]);
-
   useEffect(() => {
     getAdress();
   }, [cep]);
@@ -97,10 +93,14 @@ export default function ProfilePage() {
     };
     const sentAdress = await api.post('api/endereco', adressData);
     const enderecoId = sentAdress.data.id;
+    console.log(enderecoId);
     setAdressId(enderecoId);
-    await api.put(`api/user/endereco/${userId}/${enderecoId}`).then(() => {
-      setUserAdress(true);
-    });
+    await api
+      .put(`api/user/endereco/${userId}/${enderecoId}`)
+      .then(() => {
+        setUserAdress(true);
+      })
+      .catch((err) => console.log(err));
   };
 
   const getuserAdress = async () => {
@@ -133,7 +133,8 @@ export default function ProfilePage() {
     };
     const newAdress = await api
       .put(`api/endereco/${adressId}`, adressData)
-      .then(() => getuserAdress());
+      .then(() => getuserAdress())
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -242,7 +243,7 @@ export default function ProfilePage() {
               <Text style={styles.adressInput}>{localidade}</Text>
               <View style={styles.littleInputArea}>
                 <Text style={styles.littleInput}>{numero}</Text>
-                <Text style={styles.littleInput}>{'oi' + uf}</Text>
+                <Text style={styles.littleInput}>{uf}</Text>
               </View>
               <TouchableOpacity style={styles.adressBtn} onPress={editAdress}>
                 <Text style={{ color: 'white' }}>Editar</Text>
@@ -295,7 +296,7 @@ export default function ProfilePage() {
               </View>
               {editingAdress ? (
                 <TouchableOpacity style={styles.adressBtn} onPress={updateAdress}>
-                  <Text style={{ color: 'white' }}>Salvar</Text>
+                  <Text style={{ color: 'white' }}>Editar</Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity style={styles.adressBtn} onPress={sendAdress}>
