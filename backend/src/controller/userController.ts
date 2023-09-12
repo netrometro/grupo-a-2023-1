@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import {
   login,
   createUser,
@@ -34,8 +34,9 @@ export async function loginUser(
 
   try {
     const user = await login(body);
-    return reply.code(201).send(user);
+    return reply.code(201).send({ user: user.user.id, token: user.token });
   } catch (error) {
+    console.log(error);
     return reply.send(error);
   }
 }
@@ -53,10 +54,13 @@ export async function findUser(request: FastifyRequest, reply: FastifyReply) {
 
 export async function findUsers(request: FastifyRequest, reply: FastifyReply) {
   try {
+    const token = request.headers.authorization;
+    console.log(token);
     const user = await listUsers();
 
     return reply.code(201).send(user);
   } catch (error) {
+    console.log(error);
     return reply.send(error);
   }
 }
