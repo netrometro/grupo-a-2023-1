@@ -17,6 +17,7 @@ export default function ProfilePage() {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [cep, setCep] = useState<string>('');
+  const [CepFormatado, setCEPFormatado] = useState<string>('');
   const [bairro, setBairro] = useState<string>('');
   const [logradouro, setLogradouro] = useState<string>('');
   const [localidade, setLocalidade] = useState<string>('');
@@ -134,6 +135,10 @@ export default function ProfilePage() {
     const newAdress = await api
       .put(`api/endereco/${adressId}`, adressData)
       .then(() => getuserAdress());
+  };
+
+  const mascaraCEP = (cep: string) => {
+    return cep.replace(/(\d{5})(\d)/, '$1-$2');
   };
 
   return (
@@ -255,8 +260,13 @@ export default function ProfilePage() {
                 <TextInput
                   style={styles.littleInput}
                   placeholder="CEP"
-                  onChangeText={setCep}
-                  value={cep}
+                  onChangeText={(value) => {
+                    const cepSemMascara = value.replace(/\D/g, '');
+                    const cepComMascara = mascaraCEP(cepSemMascara);
+                    setCep(cepSemMascara);
+                    setCEPFormatado(cepComMascara);
+                  }}
+                  value={mascaraCEP(cep)}
                 ></TextInput>
                 <TextInput
                   style={styles.littleInput}
