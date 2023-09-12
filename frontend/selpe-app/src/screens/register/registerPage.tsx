@@ -32,7 +32,7 @@ export default function RegisterPage() {
         password
       };
 
-      const response = await api.post('api/user/', data);
+      const response = await api.post('api/register', data);
       alert('Cadastrado com sucesso!');
       navigation.navigate('Login');
     } catch (error) {
