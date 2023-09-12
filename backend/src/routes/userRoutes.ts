@@ -1,22 +1,29 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import {
   findUser,
   findUsers,
-  loginUser,
-  registerUser,
   removeUser,
   updateAdress,
   upgradeUser,
   userAdress,
 } from "../controller/userController";
+import { AuthMiddleware } from "../middleware/auth";
+
+const middleware = (
+  request: FastifyRequest,
+  reply: FastifyReply,
+  next: () => void
+) => {
+  AuthMiddleware(request, reply);
+  next();
+};
 
 async function userRoutes(server: FastifyInstance) {
+  server.addHook("preHandler", middleware);
   server.get("/:id", findUser);
   server.get("/users", findUsers);
   server.get("/endereco/:id", userAdress);
   server.put("/:id", upgradeUser);
-  server.post("/", registerUser);
-  server.post("/login", loginUser);
   server.post("/delete/:id", removeUser);
   server.put("/endereco/:id/:endereco", updateAdress);
 }
