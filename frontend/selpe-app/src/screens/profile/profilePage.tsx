@@ -9,6 +9,7 @@ import { useState, useEffect, useReducer } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackType } from '../../routes/stackRoutes';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
+import { useAuth } from '../../context/AuthContext';
 
 export default function ProfilePage() {
   const navigation = useNavigation<StackType>();
@@ -26,6 +27,7 @@ export default function ProfilePage() {
   const [editingAdress, setEditingAdress] = useState<boolean>(false);
   const [adress, setAdress] = useState<boolean>(false);
   const [userAdress, setUserAdress] = useState<boolean>(false);
+  const { onLogout } = useAuth();
 
   const userId = Object(route.params).id;
 
@@ -48,7 +50,9 @@ export default function ProfilePage() {
   };
 
   const logout = () => {
-    navigation.navigate('Register');
+    onLogout!().then(() => {
+      navigation.navigate('Register');
+    });
   };
 
   useEffect(() => {
@@ -71,6 +75,9 @@ export default function ProfilePage() {
     setNumero(Number(value));
   };
 
+  const handleChangeCEP = (value: string) => {
+    setCep(value);
+  };
   const getAdress = async () => {
     if (cep.length == 8) {
       const adressData = await api.get(`api/endereco/${cep}`);
