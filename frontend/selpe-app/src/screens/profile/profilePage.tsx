@@ -9,10 +9,8 @@ import { useState, useEffect, useReducer, Profiler } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackType } from '../../routes/stackRoutes';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
-import { useScreenGuard } from '../../hooks/useScreenGuard';
 
 export default function ProfilePage() {
-  useScreenGuard('ProfilePage');
   const navigation = useNavigation<StackType>();
   const route = useRoute();
   const [adressId, setAdressId] = useState<number>(0);

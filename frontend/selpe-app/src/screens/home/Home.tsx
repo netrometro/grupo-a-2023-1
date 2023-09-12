@@ -24,8 +24,10 @@ import { DeleteButton } from '../../components/deleteButton/DeleteButton';
 import { Card } from '../../components/card/Card';
 import moment from 'moment';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useScreenGuard } from '../../hooks/useScreenGuard';
 
 export const Home = () => {
+  useScreenGuard('Home');
   const navigation = useNavigation<StackType>();
   const [consumoList, setConsumoList] = useState<Array<ConsumoListInterface>>([]);
   const [registerOpen, setRegisterOpen] = useState<boolean>(false);

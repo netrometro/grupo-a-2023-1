@@ -1,26 +1,27 @@
 import { useNavigationState } from '@react-navigation/native';
+import * as LocalAuthentication from 'expo-local-authentication';
 import { useEffect, useState } from 'react';
 
 export function useScreenGuard(screenName: string) {
-  const [sessionTime, setSessionTime] = useState(0);
+  const [reloadFunc, setReloadFunc] = useState<boolean>(false);
   const navigationState = useNavigationState((state) => state);
 
+  async function handleAuth() {
+    const auth = await LocalAuthentication.authenticateAsync({
+      promptMessage: 'Desbloquei para acessar as funcionalidades'
+    });
+
+    if (!auth.success) {
+      handleAuth();
+    }
+  }
+
   useEffect(() => {
-    if (sessionTime < 10) {
-      const timer = setTimeout(() => {
-        setSessionTime((prevState) => prevState + 1);
-      }, 1000);
-      console.log(sessionTime);
-
-      return () => clearTimeout(timer);
-    } else {
-      if (navigationState.routes) {
-        const currentScreen = navigationState.routes[navigationState.index];
-
-        if (currentScreen.name === screenName) {
-          console.log('bloquear');
-        }
+    if (navigationState.routes) {
+      const currentScreen = navigationState.routes[navigationState.index];
+      if (currentScreen.name === screenName) {
+        handleAuth();
       }
     }
-  }, [sessionTime]);
+  }, []);
 }
