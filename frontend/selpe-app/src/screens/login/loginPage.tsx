@@ -30,7 +30,7 @@ export default function LoginPage() {
     }
   };
 
-  if (authState?.authenticated) {
+  if (authState?.authenticated && userId !== null) {
     navigation.navigate('Tab', {
       id: Number(userId)
     });
