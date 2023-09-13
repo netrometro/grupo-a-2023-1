@@ -1,12 +1,13 @@
 import Fastify from "fastify";
+import cors from "@fastify/cors";
 import userRoutes from "./routes/userRoutes";
 import consumoEletroRoutes from "./routes/consumoEletroRoutes";
 import consumoRoutes from "./routes/consumoRoutes";
-import eletroRoutes from "./routes/EletroRouts";
+import eletroRoutes from "./routes/EletroRoutes";
 import enderecoRoutes from "./routes/enderecoRoutes";
-import cors from "@fastify/cors";
 import tipsRoutes from "./routes/tipsRoutes";
 import emailRoutes from "./routes/emailRoutes";
+import accessRoutes from "./routes/accessRoutes";
 
 const server = Fastify();
 
@@ -16,6 +17,7 @@ server.get("/healthcheck", async function () {
 
 async function main() {
   server.register(cors, { origin: true });
+  server.register(accessRoutes, { prefix: "api" });
   server.register(userRoutes, { prefix: "api/user" });
   server.register(eletroRoutes, { prefix: "api/eletro" });
   server.register(consumoEletroRoutes, { prefix: "api/consumosEletro" });

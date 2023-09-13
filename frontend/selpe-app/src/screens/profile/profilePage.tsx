@@ -9,6 +9,7 @@ import { useState, useEffect, useReducer, Profiler } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackType } from '../../routes/stackRoutes';
 import { DeleteButton } from '../../components/deleteButton/DeleteButton';
+import { useAuth } from '../../context/AuthContext';
 
 export default function ProfilePage() {
   const navigation = useNavigation<StackType>();
@@ -17,6 +18,7 @@ export default function ProfilePage() {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [cep, setCep] = useState<string>('');
+  const [CepFormatado, setCEPFormatado] = useState<string>('');
   const [bairro, setBairro] = useState<string>('');
   const [logradouro, setLogradouro] = useState<string>('');
   const [localidade, setLocalidade] = useState<string>('');
@@ -26,6 +28,7 @@ export default function ProfilePage() {
   const [editingAdress, setEditingAdress] = useState<boolean>(false);
   const [adress, setAdress] = useState<boolean>(false);
   const [userAdress, setUserAdress] = useState<boolean>(false);
+  const { onLogout } = useAuth();
 
   const userId = Object(route.params).id;
 
@@ -48,17 +51,15 @@ export default function ProfilePage() {
   };
 
   const logout = () => {
-    navigation.navigate('Register');
+    onLogout!().then(() => {
+      navigation.navigate('Register');
+    });
   };
 
   useEffect(() => {
     getInfo();
     getuserAdress();
   }, []);
-
-  // useEffect(() => {
-  //   getuserAdress();
-  // }, [userAdress]);
 
   useEffect(() => {
     getAdress();
@@ -75,6 +76,9 @@ export default function ProfilePage() {
     setNumero(Number(value));
   };
 
+  const handleChangeCEP = (value: string) => {
+    setCep(value);
+  };
   const getAdress = async () => {
     if (cep.length == 8) {
       const adressData = await api.get(`api/endereco/${cep}`);
@@ -97,10 +101,14 @@ export default function ProfilePage() {
     };
     const sentAdress = await api.post('api/endereco', adressData);
     const enderecoId = sentAdress.data.id;
+    console.log(enderecoId);
     setAdressId(enderecoId);
-    await api.put(`api/user/endereco/${userId}/${enderecoId}`).then(() => {
-      setUserAdress(true);
-    });
+    await api
+      .put(`api/user/endereco/${userId}/${enderecoId}`)
+      .then(() => {
+        setUserAdress(true);
+      })
+      .catch((err) => console.log(err));
   };
 
   const getuserAdress = async () => {
@@ -133,7 +141,12 @@ export default function ProfilePage() {
     };
     const newAdress = await api
       .put(`api/endereco/${adressId}`, adressData)
-      .then(() => getuserAdress());
+      .then(() => getuserAdress())
+      .catch((err) => console.log(err));
+  };
+
+  const mascaraCEP = (cep: string) => {
+    return cep.replace(/(\d{5})(\d)/, '$1-$2');
   };
 
   return (
@@ -242,7 +255,7 @@ export default function ProfilePage() {
               <Text style={styles.adressInput}>{localidade}</Text>
               <View style={styles.littleInputArea}>
                 <Text style={styles.littleInput}>{numero}</Text>
-                <Text style={styles.littleInput}>{'oi' + uf}</Text>
+                <Text style={styles.littleInput}>{uf}</Text>
               </View>
               <TouchableOpacity style={styles.adressBtn} onPress={editAdress}>
                 <Text style={{ color: 'white' }}>Editar</Text>
@@ -255,8 +268,13 @@ export default function ProfilePage() {
                 <TextInput
                   style={styles.littleInput}
                   placeholder="CEP"
-                  onChangeText={setCep}
-                  value={cep}
+                  onChangeText={(value) => {
+                    const cepSemMascara = value.replace(/\D/g, '');
+                    const cepComMascara = mascaraCEP(cepSemMascara);
+                    setCep(cepSemMascara);
+                    setCEPFormatado(cepComMascara);
+                  }}
+                  value={mascaraCEP(cep)}
                 ></TextInput>
                 <TextInput
                   style={styles.littleInput}
@@ -295,7 +313,7 @@ export default function ProfilePage() {
               </View>
               {editingAdress ? (
                 <TouchableOpacity style={styles.adressBtn} onPress={updateAdress}>
-                  <Text style={{ color: 'white' }}>Salvar</Text>
+                  <Text style={{ color: 'white' }}>Editar</Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity style={styles.adressBtn} onPress={sendAdress}>

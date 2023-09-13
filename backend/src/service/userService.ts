@@ -1,27 +1,42 @@
 import { userDTO } from "../dto/userDTO";
 import prisma from "../prisma/prisma";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export async function createUser(input: userDTO) {
+  const { name, email, password } = input;
+  const hashPassword = await bcrypt.hash(password, 10);
   const user = await prisma.user.create({
-    data: input,
+    data: {
+      name,
+      email,
+      password: hashPassword,
+    },
   });
-  return user;
+  const { password: _, ...userWithoutPassword } = user;
+  return userWithoutPassword;
 }
 
 export async function login(body: userDTO) {
+  const { email, password } = body;
+
   const user = await prisma.user.findFirst({
-    where: { email: body.email },
+    where: { email },
   });
   if (!user) {
     throw new Error("user not found");
   }
 
-  const verify = user.password == body.password;
+  const verify = await bcrypt.compare(password, user.password);
   if (!verify) {
     throw new Error("wrong credentials");
   }
 
-  return user;
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET ?? "", {
+    expiresIn: "1h",
+  });
+
+  return { user, token };
 }
 
 export async function listUser(input: Number) {

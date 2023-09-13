@@ -11,35 +11,30 @@ import Button from '../../components/button/button';
 import { styles } from './style';
 import { useNavigation } from '@react-navigation/native';
 import { StackType } from '../../routes/stackRoutes';
-import { useState } from 'react';
-import { api } from '../../services/Api';
+import { useState, useContext, useEffect, useReducer } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function LoginPage() {
   const navigation = useNavigation<StackType>();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [id, setId] = useState<number>(0);
+  const { onLogin, userId, authState } = useContext(AuthContext);
 
   const handleLogin = async () => {
-    const data = {
-      email,
-      password
-    };
-    let idUser: any;
-    const response = await api
-      .post('api/user/login', data)
-      .then((res) => {
-        idUser = res.data.id;
-        setId(idUser);
-        console.log(id);
-        navigation.navigate('Tab', {
-          id: idUser
-        });
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    try {
+      const response = await onLogin!(email, password);
+      setId(Number(userId));
+    } catch (error) {
+      alert(error);
+    }
   };
+
+  if (authState?.authenticated) {
+    navigation.navigate('Tab', {
+      id: Number(userId)
+    });
+  }
 
   function registerScreen() {
     navigation.navigate('Register');
